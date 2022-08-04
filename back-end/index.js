@@ -1,13 +1,13 @@
 const express = require("express");
+const usersRoute = require("./routes/admin");
 
 const app = express();
-
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello");
-});
+//ROUTES
+app.use("/api/admins", usersRoute);
 
-app.listen(5000, () => {
-  console.log("server listening on port 3000");
+app.listen(3005, (error) => {
+  if (error) console.log("Unable to start the server");
+  else console.log("server listening on port 3005");
 });

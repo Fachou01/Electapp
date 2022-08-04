@@ -1,6 +1,5 @@
 const express = require("express");
 const usersRoute = require("./routes/admin");
-
 const app = express();
 app.use(express.json());
 

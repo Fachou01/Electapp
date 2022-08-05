@@ -15,7 +15,7 @@ const getAdminById = async (req, res) => {
   try {
     const admin = await prisma.admin.findFirst({
       where: {
-        id: id,
+        id: +id,
       },
     });
     res.status(200).json(admin);

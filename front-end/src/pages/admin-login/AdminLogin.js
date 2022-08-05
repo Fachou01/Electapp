@@ -28,7 +28,7 @@ const AdminLogin = () => {
 
             <div className="mt-8">
               <div>
-                <div>
+                {/*<div>
                   <p className="text-sm font-medium text-gray-700">
                     Sign in with
                   </p>
@@ -93,7 +93,7 @@ const AdminLogin = () => {
                       </a>
                     </div>
                   </div>
-                </div>
+                </div>*/}
 
                 <div className="mt-6 relative">
                   <div
@@ -172,6 +172,16 @@ const AdminLogin = () => {
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
                         Forgot your password?
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="text-sm">
+                      <a
+                        href="#"
+                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                      >
+                        Don't have account?
                       </a>
                     </div>
                   </div>

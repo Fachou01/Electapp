@@ -1,16 +1,28 @@
+import { useFormik } from "formik";
 import React from "react";
+import { validationSchema } from "./schema/register-schema";
 
 const AdminRegister = () => {
+  //Initial values of formik
+  const initialValues = {
+    email: "",
+    name: "",
+    password: "",
+    repeatPassword: "",
+  };
+  //on Submit form
+  const onSubmit = (values) => {
+    console.log("formik error", formik.errors);
+    console.log("formik values", values);
+  };
+  // formik hook
+  const formik = useFormik({
+    initialValues,
+    validationSchema: validationSchema,
+    onSubmit,
+  });
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full flex">
         <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
@@ -29,7 +41,7 @@ const AdminRegister = () => {
               <div className="w-full border-t border-gray-300" />
 
               <div className="mt-6">
-                <form action="#" method="POST" className="space-y-6">
+                <form onSubmit={formik.handleSubmit} className="space-y-6">
                   <div>
                     <label
                       htmlFor="email"
@@ -42,10 +54,21 @@ const AdminRegister = () => {
                         id="email"
                         name="email"
                         type="email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         autoComplete="email"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className={
+                          formik.errors.email && formik.touched.email
+                            ? "appearance-none block w-full px-3 py-2 border border-red-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                            : "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        }
                       />
+                      {formik.errors.email && formik.touched.email ? (
+                        <p className="text-red-500 text-sm">
+                          {formik.errors.email}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 
@@ -60,11 +83,21 @@ const AdminRegister = () => {
                       <input
                         id="name"
                         name="name"
-                        type="name"
-                        autoComplete="name"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        type="text"
+                        value={formik.values.name}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        className={
+                          formik.errors.name && formik.touched.name
+                            ? "appearance-none block w-full px-3 py-2 border border-red-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                            : "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        }
                       />
+                      {formik.errors.name && formik.touched.name ? (
+                        <p className="text-red-500 text-sm">
+                          {formik.errors.name}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 
@@ -80,10 +113,21 @@ const AdminRegister = () => {
                         id="password"
                         name="password"
                         type="password"
-                        autoComplete="current-password"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        autoComplete="password"
+                        className={
+                          formik.errors.password && formik.touched.password
+                            ? "appearance-none block w-full px-3 py-2 border border-red-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                            : "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        }
                       />
+                      {formik.errors.password && formik.touched.password ? (
+                        <p className="text-red-500 text-sm">
+                          {formik.errors.password}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 
@@ -98,11 +142,24 @@ const AdminRegister = () => {
                       <input
                         id="repeatPassword"
                         name="repeatPassword"
-                        type="repeatPassword"
-                        autoComplete="current-password"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        type="password"
+                        value={formik.values.repeatPassword}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        autoComplete="repeatPassword"
+                        className={
+                          formik.errors.repeatPassword &&
+                          formik.touched.repeatPassword
+                            ? "appearance-none block w-full px-3 py-2 border border-red-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                            : "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        }
                       />
+                      {formik.errors.repeatPassword &&
+                      formik.touched.repeatPassword ? (
+                        <p className="text-red-500 text-sm">
+                          {formik.errors.repeatPassword}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 

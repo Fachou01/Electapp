@@ -1,7 +1,9 @@
 const express = require("express");
+const cors = require("cors");
 const usersRoute = require("./routes/admin");
 const votersRoute = require("./routes/voter");
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 //ROUTES

@@ -1,17 +1,27 @@
 import React from "react";
 import election from "./../../assets/election.jpg";
+import { useFormik } from "formik";
+import { Link } from "react-router-dom";
+import { validationSchema } from "./schemas/login-schema";
 
 const AdminLogin = () => {
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: validationSchema,
+    onSubmit,
+  });
+
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full flex">
         <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
@@ -111,7 +121,7 @@ const AdminLogin = () => {
               </div>
 
               <div className="mt-6">
-                <form action="#" method="POST" className="space-y-6">
+                <form onSubmit={formik.handleSubmit} className="space-y-6">
                   <div>
                     <label
                       htmlFor="email"
@@ -124,10 +134,20 @@ const AdminLogin = () => {
                         id="email"
                         name="email"
                         type="email"
-                        autoComplete="email"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        className={
+                          formik.errors.email && formik.touched.email
+                            ? "appearance-none block w-full px-3 py-2 border border-red-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                            : "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        }
                       />
+                      {formik.errors.email && formik.touched.email ? (
+                        <p className="text-red-500 text-sm">
+                          {formik.errors.email}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 
@@ -143,10 +163,20 @@ const AdminLogin = () => {
                         id="password"
                         name="password"
                         type="password"
-                        autoComplete="current-password"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        className={
+                          formik.errors.password && formik.touched.password
+                            ? "appearance-none block w-full px-3 py-2 border border-red-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                            : "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        }
                       />
+                      {formik.errors.password && formik.touched.password ? (
+                        <p className="text-red-500 text-sm">
+                          {formik.errors.password}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 
@@ -176,14 +206,13 @@ const AdminLogin = () => {
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <div className="text-sm">
-                      <a
-                        href="#"
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
-                      >
-                        Don't have account?
-                      </a>
-                    </div>
+                    <Link to={"/register"}>
+                      <div className="text-sm">
+                        <div className="font-medium text-indigo-600 hover:text-indigo-500">
+                          Don't have account?
+                        </div>
+                      </div>
+                    </Link>
                   </div>
 
                   <div>

@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { validationSchema } from "./schema/register-schema";
 import { adminRegister } from "./services/admin-register-service";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const AdminRegister = () => {
   const navigate = useNavigate();
   const [userAlreadyExist, setUserAlreadyExist] = useState(false);
@@ -197,14 +197,13 @@ const AdminRegister = () => {
                   </div>
 
                   <div className="flex items-center">
-                    <div className="text-sm">
-                      <a
-                        href="#"
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
-                      >
-                        Already have an account?
-                      </a>
-                    </div>
+                    <Link to={"/login"}>
+                      <div className="text-sm">
+                        <div className="font-medium text-indigo-600 hover:text-indigo-500">
+                          Already have an account?
+                        </div>
+                      </div>
+                    </Link>
                   </div>
 
                   <div>

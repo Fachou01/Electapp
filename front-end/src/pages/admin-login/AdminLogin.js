@@ -4,17 +4,30 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { validationSchema } from "./schemas/login-schema";
 import ClipLoader from "react-spinners/ClipLoader";
+import { adminLogin } from "./services/admin-login-service";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
+  const navigate = useNavigate();
+  const [token, setToken] = useState(false);
   const [loading, setLoading] = useState(false);
   const initialValues = {
     email: "",
     password: "",
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     setLoading(true);
-    console.log(values);
+    const response = await adminLogin(values);
+    if (response.token) {
+      console.log(response.token);
+      setToken(true);
+      localStorage.setItem("token", JSON.stringify(response.token));
+      navigate("/dashboard");
+    } else {
+      console.log(response);
+    }
+    setLoading(false);
   };
 
   const formik = useFormik({

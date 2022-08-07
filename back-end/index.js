@@ -5,6 +5,7 @@ const votersRoute = require("./routes/voter");
 const app = express();
 app.use(cors());
 app.use(express.json());
+require("./middlewares/passport");
 
 //ROUTES
 app.use("/api/admins", usersRoute);

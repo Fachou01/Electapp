@@ -1,15 +1,28 @@
-/*const dotenv = require("dotenv");
+const { PrismaClient } = require("@prisma/client");
 const passport = require("passport");
-dotenv.config({ path: "../.env" });
-var JwtStrategy = require("passport-jwt").Strategy,
-  ExtractJwt = require("passport-jwt").ExtractJwt;
+const passportJwt = require("passport-jwt");
+const prisma = new PrismaClient();
+const JwtStrategy = passportJwt.Strategy;
+const ExtractJwt = passportJwt.ExtractJwt;
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.SECRET_KEY;
 
 passport.use(
-  new JwtStrategy(opts, function (jwt_payload, done) {
+  new JwtStrategy(opts, async (jwt_payload, done) => {
     console.log(jwt_payload);
+    try {
+      const admin = await prisma.admin.findFirst({
+        where: {
+          id: jwt_payload.id,
+        },
+      });
+      if (!admin) return done(null, false);
+      return done(null, admin);
+    } catch (error) {
+      return done(err, admin);
+    }
+
     /*User.findOne({ id: jwt_payload.sub }, function (err, user) {
       if (err) {
         return done(err, false);
@@ -20,6 +33,6 @@ passport.use(
         return done(null, false);
         // or you could create a new account
       }
-    });
+    });*/
   })
-);*/
+);

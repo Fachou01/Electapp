@@ -1,11 +1,13 @@
-import axios from "axios";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { validationSchema } from "./schema/register-schema";
 import { adminRegister } from "./services/admin-register-service";
 import { Link, useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
+
 const AdminRegister = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [userAlreadyExist, setUserAlreadyExist] = useState(false);
   //Initial values of formik
   const initialValues = {
@@ -17,13 +19,16 @@ const AdminRegister = () => {
   //on Submit form
   const onSubmit = async (values, { resetForm }) => {
     console.log("formik values", values);
+    setLoading(true);
     const response = await adminRegister(values);
     console.log(response);
     if (response === "User already exist !") {
       setUserAlreadyExist(true);
       resetForm();
+      setLoading(false);
     } else {
       setUserAlreadyExist(false);
+      setLoading(false);
       navigate("/login");
     }
   };
@@ -209,9 +214,18 @@ const AdminRegister = () => {
                   <div>
                     <button
                       type="submit"
-                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className={
+                        formik.isSubmitting
+                          ? "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 opacity-60"
+                          : "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      }
                     >
-                      Sign up
+                      <ClipLoader
+                        color={"4A90E2"}
+                        loading={loading}
+                        size={20}
+                      />
+                      {formik.isSubmitting ? null : "Sign up"}
                     </button>
                   </div>
                 </form>

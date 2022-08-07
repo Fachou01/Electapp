@@ -1,5 +1,33 @@
 const { PrismaClient } = require("@prisma/client");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const prisma = new PrismaClient();
+
+const authAdmin = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const admin = await prisma.admin.findFirst({
+      where: {
+        email: email,
+      },
+    });
+    if (!admin) return res.status(200).send("Email or password are invalid");
+    const verifyPassword = await bcrypt.compare(password, admin.password);
+    console.log(verifyPassword);
+    if (verifyPassword == false)
+      return res.status(200).send("Email or password are invalid");
+    const payload = {
+      id: admin.id,
+      name: admin.name,
+    };
+    const jwtToken = jwt.sign(payload, process.env.SECRET_KEY);
+    return res.status(202).json({
+      token: jwtToken,
+    });
+  } catch (error) {
+    res.send("Error auth admin");
+  }
+};
 
 const getAdmins = async (req, res) => {
   try {
@@ -38,11 +66,13 @@ const addAdmin = async (req, res) => {
     else {
       try {
         //hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+        //add new admin
         const newAdmin = await prisma.admin.create({
           data: {
             name,
             email,
-            password,
+            password: hashedPassword,
           },
         });
         res.status(201).json(newAdmin);
@@ -88,6 +118,7 @@ const deleteAdminById = async (req, res) => {
 };
 
 module.exports = {
+  authAdmin,
   getAdmins,
   getAdminById,
   addAdmin,

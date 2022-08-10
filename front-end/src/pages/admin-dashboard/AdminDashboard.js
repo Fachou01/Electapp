@@ -4,6 +4,8 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import classNames from "classnames";
 import ElectionList from "./ElectionList";
+import { adminLogout } from "./services/admin-dashboard-service";
+import { useNavigate } from "react-router-dom";
 
 const user = {
   name: "Tom Cook",
@@ -16,12 +18,20 @@ const navigation = [
   { name: "Settings", href: "#", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Your Profile", ref: "profile" },
+  { name: "Settings", ref: "settings" },
+  { name: "Sign out", ref: "signOut" },
 ];
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
+
+  const handleProfileClick = (itemRef) => {
+    if (itemRef === "signOut") {
+      adminLogout();
+      navigate("/login");
+    }
+  };
   return (
     <>
       <div className="min-h-full">
@@ -93,15 +103,15 @@ const AdminDashboard = () => {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a
-                                    href={item.href}
+                                  <div
                                     className={classNames(
                                       active ? "bg-gray-100" : "",
-                                      "block px-4 py-2 text-sm text-gray-700"
+                                      "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
                                     )}
+                                    onClick={() => handleProfileClick(item.ref)}
                                   >
                                     {item.name}
-                                  </a>
+                                  </div>
                                 )}
                               </Menu.Item>
                             ))}

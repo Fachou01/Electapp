@@ -1,16 +1,20 @@
-import React from "react";
-
-const elections = [
-  {
-    name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
-    role: "Admin",
-    email: "jane.cooper@example.com",
-  },
-  // More people...
-];
+import React, { useEffect, useState } from "react";
+import { getElections } from "./services/admin-dashboard-service";
 
 const ElectionList = () => {
+  const [elections, setElections] = useState([]);
+
+  // Call get elections api
+  const fetchElections = async () => {
+    const elections = await getElections();
+    console.log(elections);
+    setElections(elections);
+  };
+
+  useEffect(() => {
+    fetchElections();
+  }, []);
+
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -44,15 +48,15 @@ const ElectionList = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {elections.map((election) => (
-                  <tr key={election.email}>
+                  <tr key={election.id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {election.title}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {election.email}
+                      {election.startDate}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {election.role}
+                      {election.endDate}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <a

@@ -5,7 +5,7 @@ const electionController = require("../controllers/electionController");
 
 router.get(
   "/",
-  passport.authenticate("jwt", { session: false }),
+  //passport.authenticate("jwt", { session: false }),
   electionController.getElections
 );
 

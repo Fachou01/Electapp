@@ -5,6 +5,7 @@ export const getToken = () => {
 };
 
 export const getTokenValue = () => {
-  const token = localStorage.getItem("token");
+  let token = localStorage.getItem("token");
+  token = token.replace(/['"]+/g, "");
   return token;
 };

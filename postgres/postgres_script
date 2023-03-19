@@ -1,0 +1,1 @@
+docker run postgres --name postgres_db

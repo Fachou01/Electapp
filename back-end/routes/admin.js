@@ -7,11 +7,13 @@ router.post("/auth", adminController.authAdmin);
 
 router.get(
   "/",
-  passport.authenticate("jwt", { session: false }),
+  //passport.authenticate("jwt", { session: false }),
   adminController.getAdmins
 );
 
 router.get("/:id", adminController.getAdminById);
+
+router.post("/auth-admin", adminController.getAuthenticatedAdmin);
 
 router.post("/", adminController.addAdmin);
 

@@ -6,12 +6,13 @@ const JwtStrategy = passportJwt.Strategy;
 const ExtractJwt = passportJwt.ExtractJwt;
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.SECRET_KEY;
+//opts.secretOrKey = process.env.SECRET_KEY;
+opts.secretOrKey = "mkezqehjhsdfjkdshfozdhfzoe";
 
 passport.use(
   new JwtStrategy(opts, async (jwt_payload, done) => {
-    console.log(jwt_payload);
     try {
+      console.log(jwt_payload);
       const admin = await prisma.admin.findFirst({
         where: {
           id: jwt_payload.id,

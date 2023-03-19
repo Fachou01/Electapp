@@ -1,19 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { getElections } from "./services/admin-dashboard-service";
+import ClipLoader from "react-spinners/ClipLoader";
+import { useNavigate } from "react-router-dom";
+import { getElections } from "../services/admin-dashboard-service";
 
-const ElectionList = () => {
+const ElectionList = ({ showModal }) => {
+
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
   const [elections, setElections] = useState([]);
 
   // Call get elections api
   const fetchElections = async () => {
-    const elections = await getElections();
-    console.log(elections);
-    setElections(elections);
+    try {
+      const elections = await getElections();
+      if (elections) {
+        setElections(elections);
+      } else {
+        setElections([]);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const redirectElection = async (id) => {
+    navigate(`/election/${id}/overview`);
   };
 
   useEffect(() => {
     fetchElections();
-  }, []);
+  }, [showModal]);
 
   return (
     <div className="flex flex-col">
@@ -46,9 +64,25 @@ const ElectionList = () => {
                   </th>
                 </tr>
               </thead>
+
               <tbody className="bg-white divide-y divide-gray-200">
+                {isLoading &&
+                  <tr>
+                    <td colSpan={4} className="text-center p-4">
+                      <ClipLoader
+                        color={"#4A90E2"}
+                        loading={isLoading}
+                        size={25}
+                      />
+                    </td>
+                  </tr>
+                }
                 {elections.map((election) => (
-                  <tr key={election.id}>
+                  <tr
+                    key={election.id}
+                    className="cursor-pointer"
+                    onClick={() => redirectElection(election.id)}
+                  >
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {election.title}
                     </td>

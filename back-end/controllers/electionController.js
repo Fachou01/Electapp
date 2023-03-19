@@ -26,7 +26,8 @@ const getElectionById = async (req, res) => {
 
 //////////////////////////////////////////////
 const addElection = async (req, res) => {
-  const { title, description, status, adminId } = req.body;
+  const { title, description, status } = req.body;
+  const adminId = req.user.id;
   const startDate = new Date(req.body.startDate);
   const endDate = new Date(req.body.endDate);
   try {

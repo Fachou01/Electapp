@@ -3,6 +3,9 @@
 # files
 /backup
 
+# DB config
+/postgres
+
 # dependencies
 /node_modules
 /.pnp

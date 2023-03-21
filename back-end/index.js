@@ -3,7 +3,9 @@ const cors = require("cors");
 const usersRoute = require("./routes/admin");
 const votersRoute = require("./routes/voter");
 const electionsRoute = require("./routes/election");
+
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 require("./middlewares/passport");

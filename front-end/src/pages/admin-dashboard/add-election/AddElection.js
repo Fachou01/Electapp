@@ -27,8 +27,13 @@ const AddElection = ({ showModal, setShowModal }) => {
               onChange={formik.handleChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="title"
-              required
+
             />
+            {formik.errors.title && formik.touched.title ? (
+              <p className="text-red-500 text-sm">
+                {formik.errors.title}
+              </p>
+            ) : null}
           </div>
           <div>
             <label
@@ -45,8 +50,12 @@ const AddElection = ({ showModal, setShowModal }) => {
               onChange={formik.handleChange}
               placeholder="description"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              required
             />
+            {formik.errors.description && formik.touched.description ? (
+              <p className="text-red-500 text-sm">
+                {formik.errors.description}
+              </p>
+            ) : null}
           </div>
           <div>
             <label
@@ -63,8 +72,12 @@ const AddElection = ({ showModal, setShowModal }) => {
               onChange={formik.handleChange}
               placeholder="start-date"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              required
             />
+            {formik.errors.startDate && formik.touched.startDate ? (
+              <p className="text-red-500 text-sm">
+                {formik.errors.startDate}
+              </p>
+            ) : null}
           </div>
           <div>
             <label
@@ -81,8 +94,12 @@ const AddElection = ({ showModal, setShowModal }) => {
               onChange={formik.handleChange}
               placeholder="end-date"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              required
             />
+            {formik.errors.endDate && formik.touched.endDate ? (
+              <p className="text-red-500 text-sm">
+                {formik.errors.endDate}
+              </p>
+            ) : null}
           </div>
           <button
             type="submit"

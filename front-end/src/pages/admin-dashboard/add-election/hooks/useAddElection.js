@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import { addElection } from "../../services/admin-dashboard-service";
+import { validationSchema } from "../schemas/addElection-schema";
 
 
 const useAddElection = (showModal, setShowModal) => {
@@ -35,8 +36,10 @@ const useAddElection = (showModal, setShowModal) => {
 
     const formik = useFormik({
         initialValues,
+        validationSchema: validationSchema,
         onSubmit,
     });
+
     return {
         formik, showModal, handleShowModal, isButtonLoading
     }

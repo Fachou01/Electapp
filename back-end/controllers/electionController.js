@@ -1,9 +1,16 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const dayjs = require('dayjs');
 
 const getElections = async (req, res) => {
   try {
-    const elections = await prisma.election.findMany({});
+    let elections = await prisma.election.findMany({});
+    elections = elections.map(election => {
+      election.startDate = dayjs(election.startDate).format('YYYY-MM-DD');
+      election.endDate = dayjs(election.endDate).format('YYYY-MM-DD');
+      return election;
+    })
+    console.log(elections)
     res.status(200).json(elections);
   } catch (error) {
     res.send("Error get elections");
@@ -18,6 +25,8 @@ const getElectionById = async (req, res) => {
         id: +id,
       },
     });
+    // election.startDate = dayjs(election.startDate).format('YYYY-MM-DD');
+    // election.endDate = dayjs(election.endDate).format('YYYY-MM-DD');
     res.status(200).json(election);
   } catch (error) {
     res.send("Error get electionById");

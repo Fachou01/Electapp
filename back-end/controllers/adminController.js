@@ -13,7 +13,6 @@ const authAdmin = async (req, res) => {
     });
     if (!admin) return res.status(400).send("Email or password are invalid");
     const verifyPassword = await bcrypt.compare(password, admin.password);
-    console.log(verifyPassword);
     if (verifyPassword == false)
       return res.status(400).send("Email or password are invalid");
     const payload = {

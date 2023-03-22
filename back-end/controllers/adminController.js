@@ -20,7 +20,7 @@ const authAdmin = async (req, res) => {
       name: admin.name,
     };
     //const jwtToken = jwt.sign(payload, process.env.SECRET_KEY);
-    const jwtToken = jwt.sign(payload, "mkezqehjhsdfjkdshfozdhfzoe");
+    const jwtToken = jwt.sign(payload, process.env.SECRET_KEY);
 
     return res.status(202).json({
       token: jwtToken,

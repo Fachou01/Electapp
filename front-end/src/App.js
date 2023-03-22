@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<AdminLogin />}></Route>
+        <Route path="/" element={<AdminLogin />}></Route>
         <Route path="/register" element={<AdminRegister />}></Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<AdminDashboard />}></Route>

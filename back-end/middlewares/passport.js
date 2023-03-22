@@ -4,10 +4,9 @@ const passportJwt = require("passport-jwt");
 const prisma = new PrismaClient();
 const JwtStrategy = passportJwt.Strategy;
 const ExtractJwt = passportJwt.ExtractJwt;
-var opts = {};
+const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-//opts.secretOrKey = process.env.SECRET_KEY;
-opts.secretOrKey = "mkezqehjhsdfjkdshfozdhfzoe";
+opts.secretOrKey = process.env.SECRET_KEY;
 
 passport.use(
   new JwtStrategy(opts, async (jwt_payload, done) => {

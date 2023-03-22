@@ -30,7 +30,7 @@ const ElectionDashboard = () => {
   const handleProfileClick = (itemRef) => {
     if (itemRef === "signOut") {
       adminLogout();
-      navigate("/login");
+      navigate("/");
     }
   };
   return (

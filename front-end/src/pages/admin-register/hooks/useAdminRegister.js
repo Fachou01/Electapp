@@ -27,7 +27,7 @@ const useAdminRegister = () => {
                 resetForm();
             } else {
                 setUserAlreadyExist(false);
-                navigate("/login");
+                navigate("/");
             }
         } catch (error) {
             console.log(error);

@@ -64,18 +64,32 @@ const AddElection = ({ showModal, setShowModal }) => {
             >
               Start Date
             </label>
-            <input
-              type="date"
-              name="startDate"
-              id="startDate"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              placeholder="start-date"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            />
-            {formik.errors.startDate && formik.touched.startDate ? (
+            <div className="inline-block w-1/2 pr-1">
+              <input
+                type="date"
+                name="startDate"
+                id="startDate"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                placeholder="start-date"
+                className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              />
+            </div>
+            <div className="inline-block w-1/2">
+              <input
+                type="time"
+                name="startTime"
+                id="startTime"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                placeholder="start-time"
+                className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              />
+            </div>
+
+            {(formik.errors.startDate && formik.touched.startDate) || ((formik.errors.startTime && formik.touched.startTime)) ? (
               <p className="text-red-500 text-sm">
-                {formik.errors.startDate}
+                {formik.errors.startDate || formik.errors.startTime}
               </p>
             ) : null}
           </div>
@@ -86,18 +100,31 @@ const AddElection = ({ showModal, setShowModal }) => {
             >
               End Date
             </label>
-            <input
-              type="date"
-              name="endDate"
-              id="endDate"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              placeholder="end-date"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            />
-            {formik.errors.endDate && formik.touched.endDate ? (
-              <p className="text-red-500 text-sm">
-                {formik.errors.endDate}
+            <div className="inline-block w-1/2 pr-1">
+              <input
+                type="date"
+                name="endDate"
+                id="endDate"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                placeholder="end-date"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              />
+            </div>
+            <div className="inline-block w-1/2">
+              <input
+                type="time"
+                name="endTime"
+                id="endTime"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                placeholder="end-time"
+                className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              />
+            </div>
+            {(formik.errors.endDate && formik.touched.endDate) || (formik.errors.endTime && formik.touched.endTime) ? (
+              <p className="text-red-500 text-sm ">
+                {formik.errors.endDate || formik.errors.endTime}
               </p>
             ) : null}
           </div>

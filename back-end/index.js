@@ -18,7 +18,11 @@ app.use("/api/admins", usersRoute);
 app.use("/api/voters", votersRoute);
 app.use("/api/elections", electionsRoute);
 
-app.listen(3005, (error) => {
+console.log("DB URL",process.env.DATABASE_URL);
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, (error) => {
   if (error) console.log("Unable to start the server");
-  else console.log("server listening on port 3005");
+  else console.log(`Server listening on port ${PORT}`);
 });

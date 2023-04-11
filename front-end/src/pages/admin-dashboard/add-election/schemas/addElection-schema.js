@@ -12,7 +12,15 @@ export const validationSchema = yup.object().shape({
         .date("Please enter a valid date")
         .required("Start date is a required field"),
 
+    startTime: yup
+        .string("Please enter a valid time"),
+
+
     endDate: yup
         .date("Please enter a valid date")
         .required("End date is a required field"),
+
+    endTime: yup
+        .string("Please enter a valid time")
+
 });

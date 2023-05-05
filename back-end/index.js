@@ -1,5 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+
+require("dotenv").config();
+
 const usersRoute = require("./routes/admin");
 const votersRoute = require("./routes/voter");
 const electionsRoute = require("./routes/election");

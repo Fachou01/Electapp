@@ -13,7 +13,6 @@ const authAdmin = async (req, res) => {
     });
     if (!admin) return res.status(400).send("Email or password are invalid");
     const verifyPassword = await bcrypt.compare(password, admin.password);
-    console.log(verifyPassword);
     if (verifyPassword == false)
       return res.status(400).send("Email or password are invalid");
     const payload = {
@@ -21,7 +20,7 @@ const authAdmin = async (req, res) => {
       name: admin.name,
     };
     //const jwtToken = jwt.sign(payload, process.env.SECRET_KEY);
-    const jwtToken = jwt.sign(payload, "mkezqehjhsdfjkdshfozdhfzoe");
+    const jwtToken = jwt.sign(payload, process.env.SECRET_KEY);
 
     return res.status(202).json({
       token: jwtToken,

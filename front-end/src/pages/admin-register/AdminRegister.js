@@ -170,7 +170,7 @@ const AdminRegister = () => {
                 </div>
 
                 <div className="flex items-center">
-                  <Link to={"/login"}>
+                  <Link to={"/"}>
                     <div className="text-sm">
                       <div className="font-medium text-indigo-600 hover:text-indigo-500">
                         Already have an account?

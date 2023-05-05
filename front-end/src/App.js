@@ -12,20 +12,14 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" >
-          <Route element={<ProtectedRoute />}>
-            <Route path="dashboard" element={<AdminDashboard />} />
-
-            <Route path="election/:id/" element={<ElectionDashboard />} >
-              <Route path="overview" element={<Overview/>} />
-              <Route path="settings" />
-              <Route path="ballot" />
-              <Route path="voters" />
-              <Route path="preview" />
-              <Route path="launch" />
-            </Route>
-
-          </Route>
+        <Route path="/" element={<AdminLogin />}></Route>
+        <Route path="/register" element={<AdminRegister />}></Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<AdminDashboard />}></Route>
+          <Route
+            path="/election/:id/overview"
+            element={<ElectionDashboard />}
+          ></Route>
         </Route>
 
         <Route path="/login" element={<AdminLogin />} />

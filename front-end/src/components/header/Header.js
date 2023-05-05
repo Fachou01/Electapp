@@ -46,7 +46,7 @@ const Header = () => {
     const handleProfileClick = (itemRef) => {
         if (itemRef === "signOut") {
             adminLogout();
-            navigate("/login");
+            navigate("/");
         }
     };
 

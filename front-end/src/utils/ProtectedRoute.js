@@ -5,7 +5,7 @@ import { getToken } from "./getToken";
 const ProtectedRoute = () => {
   const isAuth = getToken();
 
-  return isAuth ? <Outlet /> : <Navigate to={"/login"} />;
+  return isAuth ? <Outlet /> : <Navigate to={"/"} />;
 };
 
 export default ProtectedRoute;

@@ -1,4 +1,3 @@
-import { config } from "../../../config/config";
 import axios from "axios";
 import { removeToken } from "../../../utils/removeToken";
 import { getTokenValue } from "../../../utils/getToken";
@@ -18,7 +17,7 @@ export const adminLogout = async () => {
 export const getElections = async () => {
   const header = interceptor();
   const response = await axios.get(
-    `${config.BACKEND_API}/api/elections`,
+    `${process.env.REACT_APP_BACKEND_API}/api/elections`,
     header
   );
   return response.data;
@@ -27,7 +26,7 @@ export const getElections = async () => {
 export const addElection = async (values) => {
   const header = interceptor();
   const response = await axios.post(
-    `${config.BACKEND_API}/api/elections`,
+    `${process.env.REACT_APP_BACKEND_API}/api/elections`,
     values,
     header
   );

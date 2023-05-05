@@ -6,11 +6,10 @@ const getElections = async (req, res) => {
   try {
     let elections = await prisma.election.findMany({});
     elections = elections.map(election => {
-      election.startDate = dayjs(election.startDate).format('YYYY-MM-DD');
-      election.endDate = dayjs(election.endDate).format('YYYY-MM-DD');
+      election.startDate = dayjs(election.startDate).format('YYYY-MM-DD HH:mm');
+      election.endDate = dayjs(election.endDate).format('YYYY-MM-DD HH:mm');
       return election;
     })
-    console.log(elections)
     res.status(200).json(elections);
   } catch (error) {
     res.send("Error get elections");
@@ -35,10 +34,15 @@ const getElectionById = async (req, res) => {
 
 //////////////////////////////////////////////
 const addElection = async (req, res) => {
-  const { title, description, status } = req.body;
+  const { title, description, status, startTime, endTime } = req.body;
+  console.log("body", req.body);
+  const startDate = new Date(`${req.body.startDate} ${startTime}`);
+  const endDate = new Date(`${req.body.endDate} ${endTime}`);
+  console.log("startDate",startDate);
+  console.log("endDate",endDate);
   const adminId = req.user.id;
-  const startDate = new Date(req.body.startDate);
-  const endDate = new Date(req.body.endDate);
+  // const startDate = new Date(req.body.startDate);
+  // const endDate = new Date(req.body.endDate);
   try {
     //add new election
     const newElection = await prisma.election.create({

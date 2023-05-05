@@ -12,7 +12,9 @@ const useAddElection = (showModal, setShowModal) => {
         title: "",
         description: "",
         startDate: "",
+        startTime:"",
         endDate: "",
+        endTime:"",
     };
 
     const handleShowModal = () => {
@@ -22,6 +24,7 @@ const useAddElection = (showModal, setShowModal) => {
     const onSubmit = async (values, { resetForm }) => {
         setIsButtonLoading(true);
         try {
+            console.log("values",values);
             const response = await addElection(values);
             if (response) {
                 resetForm();

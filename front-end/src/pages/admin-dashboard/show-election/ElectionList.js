@@ -26,7 +26,7 @@ const ElectionList = ({ showModal }) => {
   };
 
   const redirectElection = async (id) => {
-    navigate(`/election/${id}`);
+    navigate(`/election/${id}/overview`);
   };
 
   useEffect(() => {

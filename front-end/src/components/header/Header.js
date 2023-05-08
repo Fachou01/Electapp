@@ -10,7 +10,7 @@ import headerService from "./services/header-service";
 import Container from "../container/Container";
 
 const navigation = [
-    { name: "Dashboard", href: "#", current: true },
+    { name: "Dashboard", href: "/dashboard", current: false },
     { name: "Settings", href: "#", current: false },
 ];
 

@@ -16,6 +16,27 @@ const getElections = async (req, res) => {
   }
 };
 
+const getElectionsByAdmin = async (req, res) => {
+
+  const { id } = req.user;
+  try {
+    let elections = await prisma.election.findMany({
+      where: {
+        adminId: +id
+      }
+    });
+    elections = elections.map(election => {
+      election.startDate = dayjs(election.startDate).format('YYYY-MM-DD HH:mm');
+      election.endDate = dayjs(election.endDate).format('YYYY-MM-DD HH:mm');
+      return election;
+    })
+    console.log("elections", elections);
+    res.status(200).json(elections);
+  } catch (error) {
+    res.send("Error getElectionsByAdminId");
+  }
+};
+
 const getElectionById = async (req, res) => {
   const id = req.params.id;
   try {
@@ -38,8 +59,8 @@ const addElection = async (req, res) => {
   console.log("body", req.body);
   const startDate = new Date(`${req.body.startDate} ${startTime}`);
   const endDate = new Date(`${req.body.endDate} ${endTime}`);
-  console.log("startDate",startDate);
-  console.log("endDate",endDate);
+  console.log("startDate", startDate);
+  console.log("endDate", endDate);
   const adminId = req.user.id;
   // const startDate = new Date(req.body.startDate);
   // const endDate = new Date(req.body.endDate);
@@ -94,6 +115,7 @@ const deleteElectionById = async (req, res) => {
 
 module.exports = {
   getElections,
+  getElectionsByAdmin,
   getElectionById,
   addElection,
   updateElectionById,

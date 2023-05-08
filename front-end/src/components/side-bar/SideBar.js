@@ -13,7 +13,7 @@ const SideBar = () => {
                 <HomeIcon className="h-6 w-6 -ml-1" />
                 Overview
               </NavLink>
-              <NavLink to="settings" className="flex py-5 items-center gap-2 ">
+              <NavLink to="settings/general" className="flex py-5 items-center gap-2 ">
                 <HomeIcon className="h-6 w-6 -ml-1" />
                 Settings
               </NavLink>

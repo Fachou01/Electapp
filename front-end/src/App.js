@@ -8,7 +8,7 @@ import ElectionDashboard from "./pages/election-dashboard/ElectionDashboard";
 import Overview from "./pages/election-dashboard/Overview/Overview";
 import Settings from "./pages/election-dashboard/Settings/Settings";
 import General from "./pages/election-dashboard/Settings/pages/General";
-import Dates from "./pages/election-dashboard/Settings/pages/Dates";
+import Dates from "./pages/election-dashboard/Settings/pages/Dates/Dates";
 
 
 function App() {
@@ -21,8 +21,8 @@ function App() {
 
 						<Route path="election/:id/" element={<ElectionDashboard />} >
 							<Route path="overview" element={<Overview />} />
-							<Route path="settings" element={<Settings />} >
-								<Route path="general"  element={<General />} />
+							<Route path="settings/" element={<Settings />} >
+								<Route  path="general"  element={<General />} />
 								<Route path="dates" element={<Dates />} />
 								<Route path="email" element={<Overview />} />
 								<Route path="results" element={<Overview />} />

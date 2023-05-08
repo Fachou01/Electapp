@@ -14,10 +14,10 @@ const interceptor = () => {
 export const adminLogout = async () => {
   removeToken();
 };
-export const getElections = async () => {
+export const getElectionsByAdmin = async () => {
   const header = interceptor();
   const response = await axios.get(
-    `${process.env.REACT_APP_BACKEND_API}/api/elections`,
+    `${process.env.REACT_APP_BACKEND_API}/api/elections/admin`,
     header
   );
   return response.data;

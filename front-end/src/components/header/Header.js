@@ -3,11 +3,12 @@ import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import ClipLoader from "react-spinners/ClipLoader";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { adminLogout } from "../../pages/admin-dashboard/services/admin-dashboard-service";
 import { getTokenValue } from "../../utils/getToken";
 import headerService from "./services/header-service";
 import Container from "../container/Container";
+import { AuthContextApp } from "../../utils/contexts/AuthContext";
 
 const navigation = [
     { name: "Dashboard", href: "#", current: true },
@@ -23,7 +24,8 @@ const userNavigation = [
 const Header = () => {
 
     const navigate = useNavigate();
-    const [authenticatedUser, setAuthenticatedUser] = useState();
+
+    const { authenticatedUser, setAuthenticatedUser } = useContext(AuthContextApp);
     const [isAuthenticatedUserLoading, setIsAuthenticatedUserLoading] = useState(true);
 
     const getAuthenticatedUser = async () => {
@@ -32,6 +34,8 @@ const Header = () => {
         try {
             const response = await headerService.getAuthenticatedUser(token);
             setAuthenticatedUser({
+                id: response.id,
+                email: response.email,
                 name: response.name,
                 imageUrl: `https://api.dicebear.com/5.x/initials/svg?seed=${response.name}`
             })
@@ -53,7 +57,6 @@ const Header = () => {
     useEffect(() => {
         getAuthenticatedUser();
     }, [])
-
 
     return (
         <Disclosure as="nav" className="bg-indigo-600">
@@ -245,4 +248,4 @@ const Header = () => {
         </Disclosure>
     )
 }
-export default Header
+export default Header;

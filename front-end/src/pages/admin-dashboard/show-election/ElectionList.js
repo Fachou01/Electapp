@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useNavigate } from "react-router-dom";
-import { getElections } from "../services/admin-dashboard-service";
+import { getElectionsByAdmin } from "../services/admin-dashboard-service";
 
 const ElectionList = ({ showModal }) => {
 
   const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(true);
-  const [elections, setElections] = useState([]);
+  const [elections, setElections] = useState();
 
   // Call get elections api
   const fetchElections = async () => {
     try {
-      const elections = await getElections();
+      const elections = await getElectionsByAdmin();
       if (elections) {
         setElections(elections);
       } else {
-        setElections([]);
+        setElections();
       }
     } catch (error) {
       console.log(error);
@@ -77,31 +78,33 @@ const ElectionList = ({ showModal }) => {
                     </td>
                   </tr>
                 }
-                {elections.map((election) => (
-                  <tr
-                    key={election.id}
-                    className="cursor-pointer"
-                    onClick={() => redirectElection(election.id)}
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {election.title}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {election.startDate}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {election.endDate}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a
-                        href="#"
-                        className="text-indigo-600 hover:text-indigo-900"
-                      >
-                        Edit
-                      </a>
-                    </td>
-                  </tr>
-                ))}
+                {
+                  (elections && elections.length) &&
+                  elections.map((election) => (
+                    <tr
+                      key={election.id}
+                      className="cursor-pointer"
+                      onClick={() => redirectElection(election.id)}
+                    >
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {election.title}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {election.startDate}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {election.endDate}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <a
+                          href="#"
+                          className="text-indigo-600 hover:text-indigo-900"
+                        >
+                          Edit
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

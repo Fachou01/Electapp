@@ -1,6 +1,7 @@
-import axios from "axios";
+import httpMain from "../../../utils/api/httpMain";
+
 export const adminLogin = async (values) => {
-  const response = await axios.post(
+  const response = await httpMain.post(
     `${process.env.REACT_APP_BACKEND_API}/api/admins/auth`,
     values
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import ElectionList from "./show-election/ElectionList";
-import AddElection from "./add-election/AddElection";
+import ElectionList from "./components/show-election/ElectionList";
+import AddElection from "./components/add-election/AddElection";
 import Header from "../../components/header/Header";
 import PageLayout from "../../components/page-layout/PageLayout";
 import Container from "../../components/container/Container";

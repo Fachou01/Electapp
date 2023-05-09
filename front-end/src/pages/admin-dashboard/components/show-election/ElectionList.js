@@ -1,38 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useNavigate } from "react-router-dom";
-import { getElectionsByAdmin } from "../services/admin-dashboard-service";
+import useShowElection from "./hooks/useShowElection";
+
 
 const ElectionList = ({ showModal }) => {
 
-  const navigate = useNavigate();
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [elections, setElections] = useState();
-
-  // Call get elections api
-  const fetchElections = async () => {
-    try {
-      const elections = await getElectionsByAdmin();
-      if (elections) {
-        setElections(elections);
-      } else {
-        setElections();
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const redirectElection = async (id) => {
-    navigate(`/election/${id}/overview`);
-  };
-
-  useEffect(() => {
-    fetchElections();
-  }, [showModal]);
+  const { elections, isLoading, redirectElection } = useShowElection(showModal)
 
   return (
     <div className="flex flex-col">

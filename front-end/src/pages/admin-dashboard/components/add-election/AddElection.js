@@ -1,6 +1,6 @@
 import React from "react";
 import { ClipLoader } from "react-spinners";
-import Modal from "../../../components/modal/Modal";
+import Modal from "../../../../components/modal/Modal";
 import useAddElection from "./hooks/useAddElection";
 
 

@@ -11,7 +11,7 @@ import Container from "../container/Container";
 import { AuthContextApp } from "../../utils/contexts/AuthContext";
 
 const navigation = [
-    { name: "Dashboard", href: "#", current: true },
+    { name: "Dashboard", href: "/dashboard", current: false },
     { name: "Settings", href: "#", current: false },
 ];
 

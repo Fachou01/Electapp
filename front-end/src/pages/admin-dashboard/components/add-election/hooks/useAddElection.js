@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import { addElection } from "../../services/admin-dashboard-service";
+import { addElection } from "../../../services/admin-dashboard-service";
 import { validationSchema } from "../schemas/addElection-schema";
 
 

@@ -59,8 +59,8 @@ const Header = () => {
         <Disclosure as="nav" className="bg-indigo-600">
             {({ open }) => (
                 <>
-                    <Container>
-                        <div className="flex items-center justify-between h-16">
+                    <Container >
+                        <div className="flex items-center justify-between h-16 ">
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">
                                     <img

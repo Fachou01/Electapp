@@ -9,6 +9,7 @@ import Overview from "./pages/election-dashboard/Overview/Overview";
 import Settings from "./pages/election-dashboard/Settings/Settings";
 import General from "./pages/election-dashboard/Settings/pages/General";
 import Dates from "./pages/election-dashboard/Settings/pages/Dates/Dates";
+import DeleteElection from "./pages/election-dashboard/Settings/pages/Delete/DeleteElection";
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
 								<Route path="dates" element={<Dates />} />
 								<Route path="email" element={<Overview />} />
 								<Route path="results" element={<Overview />} />
-								<Route path="delete" element={<Overview />} />
+								<Route path="delete" element={<DeleteElection />} />
 							</Route>
 							<Route path="ballot" />
 							<Route path="voters" />

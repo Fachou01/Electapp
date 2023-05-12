@@ -98,7 +98,7 @@ function Dates() {
             loading={isButtonLoading}
             size={20}
           />
-          {formik.isSubmitting ? null : "Add election"}
+          {formik.isSubmitting ? null : "Save "}
         </button>
       </form>
     </div>

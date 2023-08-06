@@ -2,7 +2,7 @@ import axios from "axios";
 import { getTokenValue } from "../getToken";
 
 const httpMain = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_API
+    baseURL: `${process.env.REACT_APP_BACKEND_API}/api`
 });
 
 httpMain.interceptors.request.use((config) => {

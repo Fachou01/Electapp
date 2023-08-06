@@ -1,14 +1,14 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import AdminLogin from "./pages/admin-login/AdminLogin";
-import AdminDashboard from "./pages/admin-dashboard/AdminDashboard";
-import AdminRegister from "./pages/admin-register/AdminRegister";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AdminLogin from "./pages/AdminLogin/AdminLogin";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import AdminRegister from "./pages/AdminRegister/AdminRegister";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import ElectionDashboard from "./pages/election-dashboard/ElectionDashboard";
-import Overview from "./pages/election-dashboard/Overview/Overview";
-import Settings from "./pages/election-dashboard/Settings/Settings";
-import General from "./pages/election-dashboard/Settings/pages/General";
-import Dates from "./pages/election-dashboard/Settings/pages/Dates";
+import ElectionDashboard from "./pages/ElectionDashboard/ElectionDashboard";
+import Overview from "./pages/ElectionDashboard/Overview/Overview";
+import Settings from "./pages/ElectionDashboard/Settings/Settings";
+import General from "./pages/ElectionDashboard/Settings/pages/General";
+import Dates from "./pages/ElectionDashboard/Settings/pages/Dates";
 import AuthContext from "./utils/contexts/AuthContext";
 
 
@@ -19,8 +19,7 @@ function App() {
 				<Routes>
 					<Route path="/" >
 						<Route element={<ProtectedRoute />}>
-							<Route path="dashboard" element={<AdminDashboard />} />
-
+							<Route path="dashboard" element={<Dashboard />} />
 							<Route path="election/:id/" element={<ElectionDashboard />} >
 								<Route path="overview" element={<Overview />} />
 								<Route path="settings" element={<Settings />} >

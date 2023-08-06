@@ -1,0 +1,5 @@
+.outletLayout{
+  padding-left: calc(theme('padding.72') + 1.5rem);
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+}

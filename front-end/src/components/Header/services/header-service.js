@@ -12,4 +12,4 @@ const headerService = {
     getAuthenticatedUser
 }
 
-export default headerService
+export default headerService;

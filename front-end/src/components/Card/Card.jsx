@@ -1,4 +1,4 @@
-const Card = ({ color, children }) => {
+const Card = ({ extendStyle, color, children }) => {
 
   const colorPalette = {
     red: "bg-red-600",
@@ -6,7 +6,7 @@ const Card = ({ color, children }) => {
     blue: "bg-blue-600"
   }
   return (
-    <div className={`border rounded-lg shadow p-4 ${colorPalette[color] ? colorPalette[color] : "bg-white"}`}>
+    <div className={`${colorPalette[color] ? colorPalette[color] : "bg-white"} ${extendStyle && extendStyle}`} >
       {children}
     </div>
   )

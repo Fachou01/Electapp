@@ -10,6 +10,10 @@ import General from "./pages/ElectionDashboard/Settings/pages/General";
 import Dates from "./pages/ElectionDashboard/Settings/pages/Dates";
 import AuthContext from "./utils/contexts/AuthContext";
 import ElectionContext from "./utils/contexts/ElectionContext";
+import Ballot from "./pages/ElectionDashboard/Ballot/Ballot";
+import Voters from "./pages/ElectionDashboard/Voters/Voters";
+import Preview from "./pages/ElectionDashboard/Preview/Preview";
+import Launch from "./pages/ElectionDashboard/Launch/Launch";
 
 import "./App.css";
 
@@ -33,10 +37,10 @@ function App() {
 										<Route path="results" element={<Overview />} />
 										<Route path="delete" element={<Overview />} />
 									</Route>
-									<Route path="ballot" />
-									<Route path="voters" />
-									<Route path="preview" />
-									<Route path="launch" />
+									<Route path="ballot" element={<Ballot />} />
+									<Route path="voters" element={<Voters />} />
+									<Route path="preview" element={<Preview />} />
+									<Route path="launch" element={<Launch />} />
 
 								</Route>
 

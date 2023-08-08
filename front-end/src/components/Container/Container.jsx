@@ -2,7 +2,7 @@ import './Container.css';
 
 const Container = ({ outletPage, children }) => {
 	if (outletPage) return (
-		<div className="containerOutletWrapper">
+		<div className="containerOutletWrapper pt-5">
 			{children}
 		</div>
 	)

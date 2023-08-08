@@ -1,9 +1,9 @@
-import { HomeIcon, CogIcon, OfficeBuildingIcon, UserGroupIcon, PlayIcon, RssIcon } from "@heroicons/react/outline"
-import { NavLink, useParams, useOutlet, useLocation } from "react-router-dom";
-
-import "./SideBar.css";
+import { HomeIcon, CogIcon, OfficeBuildingIcon, UserGroupIcon, PlayIcon, RssIcon } from "@heroicons/react/outline";
+import { NavLink, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { ElectionContextApp } from "../../utils/contexts/ElectionContext";
+
+import "./SideBar.css";
 
 const links = [
   {
@@ -33,7 +33,7 @@ const links = [
     label: "Preview"
   },
   {
-    location: "aunch",
+    location: "launch",
     icon: () => <RssIcon className="h-6 w-6 -ml-1" />,
     label: "Launch"
   }
@@ -47,8 +47,14 @@ const SideBar = () => {
   const { election } = useContext(ElectionContextApp);
 
   const SideBarTitle = () => {
-    if (!election) return <div className="animate-pulse h-5 bg-indigo-500 rounded-full "></div>
-    return <h1>{election?.title}</h1>
+    if (!election) return <>
+      <div className="animate-pulse h-5 mb-10 bg-indigo-500 rounded-full "></div>
+      <div className="animate-pulse h-5 bg-indigo-500 rounded-full "></div>
+    </>
+    return <div>
+      <h1 className="mb-10">ElectApp</h1>
+      <h2>{election?.title}</h2>
+    </div>
   }
 
   const SideBarFooter = () => {
@@ -56,14 +62,20 @@ const SideBar = () => {
       <footer>
         <div className="mb-5 h-5 animate-pulse bg-indigo-500 rounded-full"></div>
         <div className="mb-5 h-5 animate-pulse bg-indigo-500 rounded-full"></div>
-        <div className="mb-5 h-5 animate-pulse bg-indigo-500 rounded-full"></div>
+        {/* <div className="mb-5 h-5 animate-pulse bg-indigo-500 rounded-full"></div> */}
       </footer>
     )
     return (
       <footer>
-        <div className="py-5">Start Date</div>
-        <div className="py-5">End Date</div>
-        <div className="py-5">Timezone</div>
+        <div className="py-5">
+          <p className="pb-1">Start Date</p>
+          <p>{election.startDate}</p>
+        </div>
+        <div className="py-5">
+          <p className="pb-1">End Date</p>
+          <p>{election.endDate}</p>
+        </div>
+        {/* <div className="py-5">Timezone</div> */}
       </footer>
     )
   }
@@ -71,7 +83,7 @@ const SideBar = () => {
   const SideBarBody = () => {
     if (!election) return (
       <>
-        {links.map((link) => < div className="mb-5 h-5 animate-pulse bg-indigo-500 rounded-full"></div>)}
+        {links.map(() => < div className="mb-5 h-5 animate-pulse bg-indigo-500 rounded-full"></div>)}
       </>
     )
     return (

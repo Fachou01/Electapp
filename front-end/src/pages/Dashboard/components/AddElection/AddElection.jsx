@@ -11,7 +11,7 @@ const AddElection = ({ showModal, setShowModal }) => {
   return (
     <>
       <Modal showModal={showModal} handleShowModal={handleShowModal} title={"Add a new election"}>
-        <form onSubmit={formik.handleSubmit} className="space-y-6">
+        <form onSubmit={formik.handleSubmit} className="space-y-6 w-96">
           <div>
             <label
               htmlFor="title"

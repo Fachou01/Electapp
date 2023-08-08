@@ -18,14 +18,14 @@ function Overview() {
 
   return (
     <OutletLayout pageName={"Overview"}>
-      <div className='flex items-center w-full flex-wrap mb-12'>
+      {/* <div className='flex items-center w-full flex-wrap mb-12'>
         <div className='w-1/4'>
           <Card color={"green"}>
             <div className='flex justify-between items-center text-white'>
               <HomeIcon className="h-10 w-10 " />
               <div className='flex items-end flex-col'>
                 <p className='text-lg'>0 %</p>
-                <p> Participation</p>
+                <p>Participation</p>
               </div>
             </div>
           </Card>
@@ -36,7 +36,7 @@ function Overview() {
               <UserGroupIcon className="h-10 w-10" />
               <div className='flex items-end flex-col'>
                 <p className='text-lg'>0</p>
-                <p> Voters</p>
+                <p>Voters</p>
               </div>
             </div>
           </Card>
@@ -47,7 +47,7 @@ function Overview() {
               <HomeIcon className="h-10 w-10" />
               <div className='flex items-end flex-col'>
                 <p className='text-lg'>0 %</p>
-                <p> Ballot questions</p>
+                <p>Ballot questions</p>
               </div>
             </div>
           </Card>
@@ -58,7 +58,7 @@ function Overview() {
               <HomeIcon className="h-10 w-10" />
               <div className='flex items-end flex-col'>
                 <p className='text-lg'>0 %</p>
-                <p> Options</p>
+                <p>Options</p>
               </div>
             </div>
           </Card>
@@ -80,7 +80,8 @@ function Overview() {
             <Pie data={sampleData} />
           </Card>
         </div>
-      </div>
+      </div> */}
+      <p>🚧 Under Development</p>
     </OutletLayout>
   )
 }

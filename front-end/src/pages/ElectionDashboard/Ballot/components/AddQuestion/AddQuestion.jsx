@@ -23,7 +23,7 @@ const AddQuestion = ({ showModal, setShowModal, setType, questions, setQuestions
         }
       ]
     } 
-  
+    
     setQuestions([...questions, question ]);
     
   }

@@ -7,6 +7,7 @@ import AddQuestion from './components/AddQuestion/AddQuestion';
 import { TrashIcon } from "@heroicons/react/outline";
 
 import './Ballot.css';
+import Button from '../../../components/Button/Button';
 
 
 const Ballot = () => {
@@ -31,8 +32,8 @@ const Ballot = () => {
   // } 
 
   const addOption = (question) => {
-    const newQuestions = questions.map((q)=>{
-      if(q.id === question.id){
+    const newQuestions = questions.map((q) => {
+      if (q.id === question.id) {
         const newOption = {
           title: "testOpt",
           value: "1"
@@ -42,7 +43,7 @@ const Ballot = () => {
       }
       return q;
     })
-   
+
     setQuestions(newQuestions);
   }
 
@@ -50,58 +51,58 @@ const Ballot = () => {
     if (questions && questions.length > 0) {
       return (
         <>
-        <div className='flex justify-end items-center'>
-          <button onClick={() => setShowQuestionType(true)} className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded flex items-center gap-1">
-            <PlusIcon className="h-5 w-5" />
-            Add Question
-          </button>
-        </div>
-        <div className='w-1/2 mx-auto border p-4'>
-          <header>
-            <h2 className='text-lg pb-4'>Multiple Choice</h2>
-            <p className='pb-6 text-md'>Description</p>
-          </header>
+          <div className='flex justify-end items-center'>
+            <Button variant="primary" onClick={() => setShowQuestionType(true)}>
+              <PlusIcon className="h-5 w-5" />
+              Add Question
+            </Button>
+          </div>
+          <div className='w-1/2 mx-auto border p-4'>
+            <header>
+              <h2 className='text-lg pb-4'>Multiple Choice</h2>
+              <p className='pb-6 text-md'>Description</p>
+            </header>
 
-          <div className='flex justify-center flex-col ballotWrapper w-full mx-auto'>
-            <main>
-              {
-                questions.map((question) => {
-                  return (
-                    <div className='border p-4 mb-3'>
-                      <h2 className='pb-2'>{question.q.title}</h2>
-                      <p className='pb-2'>{question.q.description}</p>
-                      <div className="py-4">
-                        {question.options.map((option) => {
-                          return (
-                            <div class="flex items-center justify-between pb-4">
-                              <div className='flex items-center gap-3 h-5'>
-                                <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 " />
-                                <input className='w-full hover:border-b-2' type="text" name="txt1" id="1" defaultValue={option.title}  />
-                                
-                              </div>
-                              {/* <div>
+            <div className='flex justify-center flex-col ballotWrapper w-full mx-auto'>
+              <main>
+                {
+                  questions.map((question) => {
+                    return (
+                      <div className='border p-4 mb-3'>
+                        <h2 className='pb-2'>{question.q.title}</h2>
+                        <p className='pb-2'>{question.q.description}</p>
+                        <div className="py-4">
+                          {question.options.map((option) => {
+                            return (
+                              <div class="flex items-center justify-between pb-4">
+                                <div className='flex items-center gap-3 h-5'>
+                                  <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 " />
+                                  <input className='w-full hover:border-b-2' type="text" name="txt1" id="1" defaultValue={option.title} />
+
+                                </div>
+                                {/* <div>
                                 <TrashIcon className='w-5 h-5' />
                               </div> */}
 
-                            </div>
-                          )
-                        })}
-                         <div class="flex items-center justify-between pb-4">
-                              <div className='flex items-center'>
-                                <input id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 " />
-                                <label onClick={()=>addOption(question)} htmlFor="default-radio-1" className="ml-2 cursor-text text-sm font-medium text-gray-400 accent-indigo-500 hover:border-b-2 ">Add new option</label>
                               </div>
+                            )
+                          })}
+                          <div class="flex items-center justify-between pb-4">
+                            <div className='flex items-center'>
+                              <input id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 " />
+                              <label onClick={() => addOption(question)} htmlFor="default-radio-1" className="ml-2 cursor-text text-sm font-medium text-gray-400 accent-indigo-500 hover:border-b-2 ">Add new option</label>
                             </div>
+                          </div>
 
+                        </div>
                       </div>
-                    </div>
-                  )
-                })
-              }
+                    )
+                  })
+                }
 
-            </main>
+              </main>
+            </div>
           </div>
-        </div>
         </>
       )
     }
@@ -109,19 +110,17 @@ const Ballot = () => {
       <div className='flex items-center justify-center flex-col ballotWrapper h-full -mt-14 w-fit mx-auto'>
         <h2 className='text-4xl pb-4'>Build Your Ballot</h2>
         <p className='pb-6 text-xl'>Get started by adding your first question</p>
-        <button onClick={() => setShowQuestionType(true)} className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded flex items-center gap-1">
+        <Button variant="primary" onClick={() => setShowQuestionType(true)}>
           <PlusIcon className="h-5 w-5" />
           Add Question
-        </button>
+        </Button>
       </div>
     )
   }
 
   return (
     <OutletLayout pageName={"Ballot"}>
-
       <Card extendStyle="h-full">
-        
         <QuestionsLayout />
       </Card>
       {showQuestionType && <QuestionType showModal={showQuestionType} setShowModal={setShowQuestionType} setShowAddQuestion={setShowAddQuestion} type={type} setType={setType} />}

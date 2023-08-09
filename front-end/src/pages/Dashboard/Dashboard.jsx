@@ -5,6 +5,7 @@ import AddElection from "./components/AddElection/AddElection";
 import Header from "../../components/Header/Header";
 import PageLayout from "../../components/PageLayout/PageLayout";
 import Container from "../../components/Container/Container";
+import Button from "../../components/Button/Button";
 
 
 const Dashboard = () => {
@@ -27,9 +28,10 @@ const Dashboard = () => {
               </h1>
             </div>
             <div onClick={handleNewElectionClick}>
-              <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded">
+              
+              <Button className="text-md" variant={"primary"}>
                 New Election
-              </button>
+              </Button>
             </div>
           </div>
         </Container>

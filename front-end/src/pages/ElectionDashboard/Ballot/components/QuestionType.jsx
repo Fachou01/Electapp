@@ -1,3 +1,4 @@
+import Button from '../../../../components/Button/Button';
 import Modal from '../../../../components/Modal/Modal';
 
 const QuestionType = ({ showModal, setShowModal, setShowAddQuestion, type, setType }) => {
@@ -36,9 +37,9 @@ const QuestionType = ({ showModal, setShowModal, setShowAddQuestion, type, setTy
         </div>
 
       </div>
-      <button onClick={handleSubmit} className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded">
+      <Button onClick={handleSubmit} variant={"primary"} className="font-medium">
         Confirm
-      </button>
+      </Button>
     </Modal>
   )
 }

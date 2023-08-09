@@ -2,6 +2,7 @@ import React from "react";
 import { ClipLoader } from "react-spinners";
 import Modal from "../../../../components/Modal/Modal";
 import useAddElection from "./hooks/useAddElection";
+import Button from "../../../../components/Button/Button";
 
 
 const AddElection = ({ showModal, setShowModal }) => {
@@ -128,21 +129,17 @@ const AddElection = ({ showModal, setShowModal }) => {
               </p>
             ) : null}
           </div>
-          <button
+          <Button
+            variant={"primary"}
             type="submit"
-            className={
-              formik.isSubmitting
-                ? "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 opacity-60"
-                : "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            }
-          >
+            className={`w-full ${formik.isSubmitting} && opacity-60`}>
             <ClipLoader
               color={"4A90E2"}
               loading={isButtonLoading}
               size={20}
             />
             {formik.isSubmitting ? null : "Add election"}
-          </button>
+          </Button>
         </form>
       </Modal>
     </>

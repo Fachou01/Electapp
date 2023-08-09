@@ -1,3 +1,4 @@
+import Button from '../../../../../components/Button/Button';
 import Modal from '../../../../../components/Modal/Modal';
 
 const AddQuestion = ({ showModal, setShowModal, setType, questions, setQuestions }) => {
@@ -85,9 +86,9 @@ const AddQuestion = ({ showModal, setShowModal, setType, questions, setQuestions
           />
 
         </div>
-        <button type='submit' className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded">
+        <Button type='submit' variant={"primary"}>
           Save
-        </button>
+        </Button>
       </form>
 
     </Modal>

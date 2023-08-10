@@ -10,7 +10,6 @@ const getElections = async (req, res) => {
       election.endDate = dayjs(election.endDate).format('YYYY-MM-DD');
       return election;
     })
-    console.log(elections)
     res.status(200).json(elections);
   } catch (error) {
     res.send("Error get elections");

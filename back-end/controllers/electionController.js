@@ -30,10 +30,10 @@ const getElectionsByAdmin = async (req, res) => {
       election.endDate = dayjs(election.endDate).format('YYYY-MM-DD HH:mm');
       return election;
     })
-    console.log("elections", elections);
-    res.status(200).json(elections);
+    return res.status(200).json(elections);
   } catch (error) {
-    res.send("Error getElectionsByAdminId");
+    console.log(error);
+    return res.status(400).send("Error getElectionsByAdminId");
   }
 };
 
@@ -45,23 +45,27 @@ const getElectionById = async (req, res) => {
         id: +id,
       },
     });
-    // election.startDate = dayjs(election.startDate).format('YYYY-MM-DD');
-    // election.endDate = dayjs(election.endDate).format('YYYY-MM-DD');
-    res.status(200).json(election);
+
+    if (election) {
+      election.startDate = dayjs(election.startDate).format('YYYY-MM-DD HH:mm');
+      election.endDate = dayjs(election.endDate).format('YYYY-MM-DD HH:mm');
+      return res.status(200).json(election);
+    }
+
+    return res.status(204).json(election);
+
   } catch (error) {
-    res.send("Error get electionById");
+    return res.status(400).send("Error get electionById");
   }
 };
 
 //////////////////////////////////////////////
 const addElection = async (req, res) => {
   const { title, description, status, startTime, endTime } = req.body;
-  console.log("body", req.body);
   const startDate = new Date(`${req.body.startDate} ${startTime}`);
   const endDate = new Date(`${req.body.endDate} ${endTime}`);
-  console.log("startDate", startDate);
-  console.log("endDate", endDate);
   const adminId = req.user.id;
+  const defaultStatus = "PENDING";
   // const startDate = new Date(req.body.startDate);
   // const endDate = new Date(req.body.endDate);
   try {
@@ -74,12 +78,15 @@ const addElection = async (req, res) => {
         startDate,
         endDate,
         adminId,
+        status: defaultStatus
       },
     });
-    res.status(201).json(newElection);
+    if (newElection) return res.status(201).json(newElection);
+    return res.status(400).send("Bad Request");
+
   } catch (error) {
     console.log(error);
-    res.send("Error creating election");
+    return res.status(400).send("Error creating election");
   }
 };
 
@@ -119,5 +126,5 @@ module.exports = {
   getElectionById,
   addElection,
   updateElectionById,
-  deleteElectionById,
+  deleteElectionById
 };

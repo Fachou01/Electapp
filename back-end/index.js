@@ -6,6 +6,8 @@ require("dotenv").config();
 const usersRoute = require("./routes/admin");
 const votersRoute = require("./routes/voter");
 const electionsRoute = require("./routes/election");
+const questionsRoute = require("./routes/question");
+const suggestionRoute = require("./routes/sueggestion");
 
 const app = express();
 
@@ -17,8 +19,10 @@ require("./middlewares/passport");
 app.use("/api/admins", usersRoute);
 app.use("/api/voters", votersRoute);
 app.use("/api/elections", electionsRoute);
+app.use("/api/questions", questionsRoute);
+app.use("/api/suggestions", suggestionRoute);
 
-console.log("DB URL",process.env.DATABASE_URL);
+console.log("DB URL", process.env.DATABASE_URL);
 
 const PORT = process.env.PORT || 5000;
 

@@ -18,7 +18,6 @@ model Admin {
   email String @unique
   password String
   elections Election[]
-
 }
 
 model Voter {
@@ -28,9 +27,8 @@ model Voter {
   name String
   email String @unique
   password String
-  elections VoterOnElection[]
-  suggestion VoterOnSuggestion[]
-
+  ballots Ballot[]
+  responses Response[]
 }
 
 model Election {
@@ -39,22 +37,23 @@ model Election {
   updatedAt DateTime? @updatedAt
   title String
   description String?
-  status Boolean @default(false)
+  status ElectionStatus
   startDate DateTime @default(now())
   endDate DateTime
   admin Admin @relation(fields: [adminId],references: [id])
   adminId Int
-  voters VoterOnElection[]
+  ballots Ballot[]
   questions Question[]
 }
 
-model VoterOnElection {
+model Ballot {
   id Int @default(autoincrement())
   assignedAt DateTime @default(now())
   election Election @relation(fields: [electionId],references: [id])
   electionId Int
   voter Voter @relation(fields: [voterId],references: [id])
   voterId Int
+  status BallotStatus
   @@id([id,electionId, voterId])
 }
 
@@ -67,8 +66,8 @@ model Question {
   suggestions Suggestion[]
   election Election @relation(fields: [electionId],references: [id])
   electionId Int
-
 }
+
 model Suggestion {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -77,10 +76,10 @@ model Suggestion {
   description String?
   question Question @relation(fields: [questionId],references: [id])
   questionId Int
-  voter VoterOnSuggestion[]  
+  responses Response[]  
 }
 
-model VoterOnSuggestion {
+model Response {
   id Int  @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
@@ -90,4 +89,14 @@ model VoterOnSuggestion {
   suggestionId Int
 
   @@id([id,voterId,suggestionId])
+}
+
+enum BallotStatus {
+  SUBMITTED
+  PENDING
+}
+
+enum ElectionStatus {
+  STARTED
+  PENDING
 }

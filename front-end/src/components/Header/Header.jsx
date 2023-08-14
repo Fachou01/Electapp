@@ -62,7 +62,7 @@ const Header = ({ isDashboard }) => {
 	const headerWrapperStyle = isDashboard ? "header-wrapper-isDashboard" : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
 
 	return (
-		<Disclosure as="nav" className="bg-indigo-600">
+		<Disclosure as="nav" className="bg-primary-100">
 			{({ open }) => (
 				<>
 					<div className={headerWrapperStyle}>
@@ -83,8 +83,8 @@ const Header = ({ isDashboard }) => {
 												href={item.href}
 												className={classNames(
 													item.current
-														? "bg-indigo-700 text-white"
-														: "text-white hover:bg-indigo-500 hover:bg-opacity-75",
+														? "bg-primary-100 text-white"
+														: "text-white hover:bg-primary-300 hover:bg-opacity-75",
 													"px-3 py-2 rounded-md text-sm font-medium"
 												)}
 												aria-current={item.current ? "page" : undefined}
@@ -99,7 +99,7 @@ const Header = ({ isDashboard }) => {
 								<div className="ml-4 flex items-center md:ml-6">
 									<button
 										type="button"
-										className="bg-indigo-600 p-1 rounded-full text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white"
+										className="bg-primary-100 p-1 rounded-full text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-300 focus:ring-white"
 									>
 										<span className="sr-only">View notifications</span>
 										<BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -238,7 +238,7 @@ const Header = ({ isDashboard }) => {
 										key={item.name}
 										as="a"
 										href={item.href}
-										className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-indigo-500 hover:bg-opacity-75"
+										className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-red-500 hover:bg-opacity-75"
 									>
 										{item.name}
 									</Disclosure.Button>

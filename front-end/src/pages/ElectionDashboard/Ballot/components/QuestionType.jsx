@@ -35,7 +35,6 @@ const QuestionType = ({ showModal, setShowModal, setShowAddQuestion, type, setTy
             </div>
           </label>
         </div>
-
       </div>
       <Button onClick={handleSubmit} variant={"primary"} className="font-medium">
         Confirm

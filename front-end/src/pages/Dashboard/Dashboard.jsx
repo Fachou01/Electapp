@@ -19,7 +19,7 @@ const Dashboard = () => {
   return (
     <PageLayout>
       <Header isDashboard={false} />
-      <header className="bg-white shadow py-6">
+      <header className="bg-light-100 shadow py-6">
         <Container>
           <div className="flex justify-between">
             <div>

@@ -1,39 +1,27 @@
 import Button from '../../../../../components/Button/Button';
 import Modal from '../../../../../components/Modal/Modal';
+import useAddQuestion from './logic/useAddQuestion';
+import { ClipLoader } from 'react-spinners';
 
-const AddQuestion = ({ showModal, setShowModal, setType, questions, setQuestions }) => {
+const AddQuestion = ({ showModal, setShowModal, questions, setQuestions }) => {
+
+
+  const { loading, error, formik } = useAddQuestion(setShowModal, questions, setQuestions);
 
   const handleShowModal = () => {
     setShowModal(!showModal);
   }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setShowModal(false);
-    setType();
-    const question = {
-      q: {
-        id:1,
-        title: "test",
-        description: "test desc"
-      },
-      options: [
-        {
-          id:1,
-          title: "testOpt",
-          value: "1"
-        }
-      ]
-    } 
-    
-    setQuestions([...questions, question ]);
-    
-  }
+  
+  // const FormBodyLoading = () =>  <div className='flex w-full h-full rounded-lg items-center justify-center absolute top-0 left-0'><ClipLoader color='#32a852' loading={loading} size={50} /></div>
+
+  
   return (
     <Modal showModal={showModal} handleShowModal={handleShowModal} title={"Multiple Choice Question"}>
+      {/* {loading && !error && <FormBodyLoading />} */}
       <h1 className="mb-4">Multiple Choice - Voters can select one or many options</h1>
-      <form onSubmit={handleSubmit} className="space-y-6 w-full">
-        <div className='bg-gray-50 border border-gray-300 p-2.5 rounded-lg'>
-          Voters can select a maximum of  
+      <form onSubmit={formik.handleSubmit} className="space-y-6 w-full">
+        <div className='bg-light-300 border border-light-300 p-2.5 rounded-lg'>
+          Voters can select a maximum of
           <input
             type="number"
             name="minimum"
@@ -42,7 +30,7 @@ const AddQuestion = ({ showModal, setShowModal, setType, questions, setQuestions
             min={1}
             className="bg-gray-50 mx-2 border w-14 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1"
           />
-          and a minimum of 
+          and a minimum of
           <input
             type="number"
             name="maximum"
@@ -62,10 +50,12 @@ const AddQuestion = ({ showModal, setShowModal, setType, questions, setQuestions
             Title
           </label>
           <input
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             type="text"
             name="title"
-            id="title"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            id="questionTitle"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-300 focus:border-secondary-300 block w-full p-2.5"
             placeholder="title"
 
           />
@@ -78,16 +68,17 @@ const AddQuestion = ({ showModal, setShowModal, setType, questions, setQuestions
             Description
           </label>
           <input
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             type="text"
             name="description"
-            id="description"
+            id="questionDescription"
             placeholder="description"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-300 focus:border-secondary-300 block w-full p-2.5"
           />
-
         </div>
-        <Button type='submit' variant={"primary"}>
-          Save
+        <Button disabled={loading} type='submit' variant={"primary"}>
+          {loading ? <ClipLoader color='#FFF' size={18} loading={loading}  /> : <span>Save</span>}
         </Button>
       </form>
 

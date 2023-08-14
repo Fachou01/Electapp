@@ -6,7 +6,7 @@ const Card = ({ extendStyle, color, children }) => {
     blue: "bg-blue-600"
   }
   return (
-    <div className={`${colorPalette[color] ? colorPalette[color] : "bg-white"} ${extendStyle && extendStyle}`} >
+    <div className={`${colorPalette[color] ? colorPalette[color] : "bg-light-100"} ${extendStyle && extendStyle}`} >
       {children}
     </div>
   )

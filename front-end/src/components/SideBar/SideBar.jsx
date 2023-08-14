@@ -1,6 +1,6 @@
-import { HomeIcon, CogIcon, OfficeBuildingIcon, UserGroupIcon, PlayIcon, RssIcon } from "@heroicons/react/outline";
-import { NavLink, useLocation } from "react-router-dom";
 import { useContext } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { HomeIcon, CogIcon, OfficeBuildingIcon, UserGroupIcon, PlayIcon, RssIcon } from "@heroicons/react/outline";
 import { ElectionContextApp } from "../../utils/contexts/ElectionContext";
 
 import "./SideBar.css";
@@ -48,8 +48,8 @@ const SideBar = () => {
 
   const SideBarTitle = () => {
     if (!election) return <>
-      <div className="animate-pulse h-5 mb-10 bg-indigo-500 rounded-full "></div>
-      <div className="animate-pulse h-5 bg-indigo-500 rounded-full "></div>
+      <div className="animate-pulse h-5 mb-10 bg-primary-300 rounded-full "></div>
+      <div className="animate-pulse h-5 bg-primary-300 rounded-full "></div>
     </>
     return <div>
       <h1 className="mb-10">ElectApp</h1>
@@ -60,8 +60,8 @@ const SideBar = () => {
   const SideBarFooter = () => {
     if (!election) return (
       <footer>
-        <div className="mb-5 h-5 animate-pulse bg-indigo-500 rounded-full"></div>
-        <div className="mb-5 h-5 animate-pulse bg-indigo-500 rounded-full"></div>
+        <div className="mb-5 h-5 animate-pulse bg-primary-300 rounded-full"></div>
+        <div className="mb-5 h-5 animate-pulse bg-primary-300rounded-full"></div>
         {/* <div className="mb-5 h-5 animate-pulse bg-indigo-500 rounded-full"></div> */}
       </footer>
     )
@@ -83,12 +83,12 @@ const SideBar = () => {
   const SideBarBody = () => {
     if (!election) return (
       <>
-        {links.map(() => < div className="mb-5 h-5 animate-pulse bg-indigo-500 rounded-full"></div>)}
+        {links.map(() => < div className="mb-5 h-5 animate-pulse bg-primary-300 rounded-full"></div>)}
       </>
     )
     return (
       <>
-        {links.map((link) => <NavLink to={link.location} className={`${currentChildPath === link.location && "bg-indigo-500 bg-opacity-75"} flex py-5 px-2  items-center gap-2 rounded-md text-white transition-all hover:bg-indigo-500 hover:bg-opacity-75 side-bar-item`}>
+        {links.map((link) => <NavLink to={link.location} className={`${currentChildPath === link.location && "bg-primary-300 bg-opacity-75"} flex py-5 px-2  items-center gap-2 rounded-md text-white transition-all hover:bg-primary-300 hover:bg-opacity-75 side-bar-item`}>
           {link.icon()}
           {link.label}
         </NavLink>)}
@@ -97,7 +97,7 @@ const SideBar = () => {
   }
 
   return (
-    <aside className="fixed w-72 h-screen sideBarAside bg-indigo-600 text-white shadow-lg">
+    <aside className="fixed w-72 h-screen sideBarAside bg-primary-100 text-white shadow-lg">
       <div className="flex flex-col justify-between px-2 sm:px-4 lg:px-4 h-full">
         <header className="pt-8 px-2">
           <SideBarTitle />

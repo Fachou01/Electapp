@@ -14,13 +14,16 @@ import Ballot from "./pages/ElectionDashboard/Ballot/Ballot";
 import Voters from "./pages/ElectionDashboard/Voters/Voters";
 import Preview from "./pages/ElectionDashboard/Preview/Preview";
 import Launch from "./pages/ElectionDashboard/Launch/Launch";
+import { ToastContainer } from "react-toastify";
 
-import "./App.css";
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 
 function App() {
 	return (
 		<AuthContext>
+			<ToastContainer className="customToast" autoClose="6000" hideProgressBar="true" />
 			<ElectionContext>
 				<Router>
 					<Routes>

@@ -74,7 +74,7 @@ model Suggestion {
   updatedAt DateTime? @updatedAt
   title String
   description String?
-  question Question @relation(fields: [questionId],references: [id])
+  question Question @relation(fields: [questionId],references: [id],onDelete: Cascade)
   questionId Int
   responses Response[]  
 }

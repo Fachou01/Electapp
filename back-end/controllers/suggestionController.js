@@ -50,8 +50,9 @@ const addSuggestion = async (req, res) => {
 
 const bulkCreateSuggestion = async (req, res) => {
   try {
-    const { suggestions, questionId } = req.body;
-    const response = await suggestionService.bulkCreateSuggestion(suggestions, questionId);
+    const { suggestions } = req.body;
+    const { questionId } = req.params;
+    const response = await suggestionService.bulkCreateSuggestion(suggestions, +questionId);
     return res.status(response.statusCode).send(response.payload);
   } catch (error) {
     console.log(error);

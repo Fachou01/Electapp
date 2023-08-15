@@ -1,4 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
+const questionService = require("../services/questionService");
+
 const prisma = new PrismaClient();
 
 const getQuestions = async (req, res) => {
@@ -12,6 +14,30 @@ const getQuestions = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(400).send("Error getQuestions");
+  }
+};
+
+
+const getQuestionsByElectionId = async (req, res) => {
+  const { electionId } = req.params;
+  try {
+    const questions = await prisma.question.findMany({
+      where: {
+        electionId: +electionId
+      },
+      include: {
+        suggestions: true
+      }
+    });
+    if (questions && questions.length) {
+      return res.status(200).json(questions);
+    }
+
+    return res.status(400).send("Bad request");
+
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Error get getQuestionsByElectionId");
   }
 };
 
@@ -33,6 +59,7 @@ const addQuestion = async (req, res) => {
 
     const createdQuestion = await prisma.question.create({ data: question });
     if (createdQuestion) {
+
       return res.status(201).json({
         status: "Success",
         message: "Question created successfully",
@@ -47,7 +74,21 @@ const addQuestion = async (req, res) => {
   }
 }
 
+const deleteQuestionById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await questionService.deleteQuestionById(+id);
+    return res.status(response.statusCode).send(response.payload);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Error occured");
+  }
+}
+
+
 module.exports = {
   getQuestions,
-  addQuestion
+  getQuestionsByElectionId,
+  addQuestion,
+  deleteQuestionById
 };

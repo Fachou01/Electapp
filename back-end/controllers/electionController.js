@@ -44,6 +44,9 @@ const getElectionById = async (req, res) => {
       where: {
         id: +id,
       },
+      include: {
+      questions: true
+    }
     });
 
     if (election) {

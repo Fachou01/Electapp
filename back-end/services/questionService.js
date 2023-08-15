@@ -42,6 +42,35 @@ const addQuestion = async (title, description, electionId) => {
   }
 }
 
+const deleteQuestionById = async (id) => {
+  try {
+    const question = await prisma.question.delete({
+      where: {
+        id: id,
+      },
+    });
+    if (question) return {
+      statusCode: 200,
+      payload: {
+        message: "Question successfully deleted"
+      }
+    }
+
+    return {
+      statusCode: 400,
+      payload: {
+        message: "Bad request"
+      }
+    }
+
+  } catch (error) {
+    console.log(error);
+    throw ("Error deleteQuestionById");
+  }
+}
+
+
 module.exports = {
-  addQuestion
+  addQuestion,
+  deleteQuestionById
 }

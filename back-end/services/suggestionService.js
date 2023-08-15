@@ -15,11 +15,22 @@ const bulkCreateSuggestion = async (suggestions, questionId) => {
       }
     }
 
-    const createdSuggestions = await prisma.suggestion.createMany({
-      data: suggestions
-    })
-    console.log("createdSuggestions",createdSuggestions);
-    if (createdSuggestions) {
+    // BULK CREATE OR UPDATE SUGGESTIONS
+    let suggestionsCreated = true;
+    for (const suggestion of suggestions) {
+      let { id, ...suggestionToInsert } = suggestion;
+      // IF THE SUGGESTION IS NEWLY CREATED 
+      if(isNaN(id)) id = -1;
+      
+      const createdSuggestion = await prisma.suggestion.upsert({
+        where: { id: +id },
+        update: suggestionToInsert,
+        create: suggestionToInsert
+      })
+      if (!createdSuggestion) suggestionsCreated = false;
+    }
+
+    if (suggestionsCreated) {
       return {
         statusCode: 201,
         payload: {
@@ -39,6 +50,7 @@ const bulkCreateSuggestion = async (suggestions, questionId) => {
     throw ("Error bulkCreateSuggestion");
   }
 }
+
 
 module.exports = {
   bulkCreateSuggestion

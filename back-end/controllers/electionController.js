@@ -16,6 +16,27 @@ const getElections = async (req, res) => {
   }
 };
 
+const getElectionsByAdmin = async (req, res) => {
+
+  const { id } = req.user;
+  try {
+    let elections = await prisma.election.findMany({
+      where: {
+        adminId: +id
+      }
+    });
+    elections = elections.map(election => {
+      election.startDate = dayjs(election.startDate).format('YYYY-MM-DD HH:mm');
+      election.endDate = dayjs(election.endDate).format('YYYY-MM-DD HH:mm');
+      return election;
+    })
+    return res.status(200).json(elections);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Error getElectionsByAdminId");
+  }
+};
+
 const getElectionById = async (req, res) => {
   const id = req.params.id;
   try {
@@ -23,24 +44,31 @@ const getElectionById = async (req, res) => {
       where: {
         id: +id,
       },
+      include: {
+      questions: true
+    }
     });
-    // election.startDate = dayjs(election.startDate).format('YYYY-MM-DD');
-    // election.endDate = dayjs(election.endDate).format('YYYY-MM-DD');
-    res.status(200).json(election);
+
+    if (election) {
+      election.startDate = dayjs(election.startDate).format('YYYY-MM-DD HH:mm');
+      election.endDate = dayjs(election.endDate).format('YYYY-MM-DD HH:mm');
+      return res.status(200).json(election);
+    }
+
+    return res.status(204).json(election);
+
   } catch (error) {
-    res.send("Error get electionById");
+    return res.status(400).send("Error get electionById");
   }
 };
 
 //////////////////////////////////////////////
 const addElection = async (req, res) => {
   const { title, description, status, startTime, endTime } = req.body;
-  console.log("body", req.body);
   const startDate = new Date(`${req.body.startDate} ${startTime}`);
   const endDate = new Date(`${req.body.endDate} ${endTime}`);
-  console.log("startDate",startDate);
-  console.log("endDate",endDate);
   const adminId = req.user.id;
+  const defaultStatus = "PENDING";
   // const startDate = new Date(req.body.startDate);
   // const endDate = new Date(req.body.endDate);
   try {
@@ -53,12 +81,15 @@ const addElection = async (req, res) => {
         startDate,
         endDate,
         adminId,
+        status: defaultStatus
       },
     });
-    res.status(201).json(newElection);
+    if (newElection) return res.status(201).json(newElection);
+    return res.status(400).send("Bad Request");
+
   } catch (error) {
     console.log(error);
-    res.send("Error creating election");
+    return res.status(400).send("Error creating election");
   }
 };
 
@@ -94,8 +125,9 @@ const deleteElectionById = async (req, res) => {
 
 module.exports = {
   getElections,
+  getElectionsByAdmin,
   getElectionById,
   addElection,
   updateElectionById,
-  deleteElectionById,
+  deleteElectionById
 };

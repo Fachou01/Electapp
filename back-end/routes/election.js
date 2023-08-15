@@ -8,10 +8,15 @@ router.get(
   //passport.authenticate("jwt", { session: false }),
   electionController.getElections
 );
+router.get(
+  "/admin",
+  passport.authenticate("jwt", { session: false }),
+  electionController.getElectionsByAdmin
+);
 
 router.get(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   electionController.getElectionById
 );
 

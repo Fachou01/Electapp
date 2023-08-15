@@ -58,7 +58,7 @@ const getAdminById = async (req, res) => {
 
 const getAuthenticatedAdmin = async (req, res) => {
   const { token } = req.body;
-  console.log(token)
+
   try {
     const { id } = jwt.decode(token);
     if(id){

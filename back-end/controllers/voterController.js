@@ -20,7 +20,7 @@ const getVoterById = async (req, res) => {
     });
     res.status(200).json(voter);
   } catch (error) {
-    res.send("Error get VoterById");
+    res.send("Error getVoterById");
   }
 };
 

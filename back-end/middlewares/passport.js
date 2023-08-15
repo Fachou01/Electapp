@@ -11,7 +11,6 @@ opts.secretOrKey = process.env.SECRET_KEY;
 passport.use(
   new JwtStrategy(opts, async (jwt_payload, done) => {
     try {
-      console.log(jwt_payload);
       const admin = await prisma.admin.findFirst({
         where: {
           id: jwt_payload.id,

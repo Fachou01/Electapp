@@ -3,8 +3,11 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 
 import './Question.css';
+import DeleteQuestionModal from './components/DeleteQuestionModal/DeleteQuestionModal';
+import useQuestion from './logic/useQuestion';
 
-const QuestionDropDown = () => {
+const QuestionDropDown = ({ handleShowDeleteModal }) => {
+
   return (
     <Menu as="div" className="relative">
       <div>
@@ -41,6 +44,7 @@ const QuestionDropDown = () => {
                 <button
                   className={`${active ? 'bg-secondary-100 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  onClick={handleShowDeleteModal}
                 >
                   Delete
                 </button>
@@ -54,29 +58,33 @@ const QuestionDropDown = () => {
   )
 }
 
-const Question = ({ question, addOption, Suggestions }) => {
+const Question = ({ refreshQuestions, question, addOption, Suggestions }) => {
 
+  const { handleShowDeleteModal, showDeleteModal, deleteLoading, deleteQuestionById } = useQuestion(question, refreshQuestions);
   return (
-    <div className='border p-4 mb-3 bg-light-100 rounded-lg relative'>
-      <div className='flex justify-between items-center'>
-        <h2 className='pb-2'>{question.title}</h2>
-        {/* <ViewListIcon className='w-5 h-5' /> */}
-        <QuestionDropDown />
-      </div>
+    <>
+      <div className='border p-4 mb-3 bg-light-100 rounded-lg relative'>
+        <div className='flex justify-between items-center'>
+          <h2 className='pb-2'>{question.title}</h2>
+          {/* <ViewListIcon className='w-5 h-5' /> */}
+          <QuestionDropDown handleShowDeleteModal={handleShowDeleteModal} />
+        </div>
 
-      <p className='pb-2'>{question.description}</p>
-      {/* OPTIONS */}
+        <p className='pb-2'>{question.description}</p>
+        {/* OPTIONS */}
 
-      <div className="py-4">
-        <Suggestions question={question} />
-        <div class="flex items-center justify-between pb-4 w-full">
-          <div className='flex items-center w-full'>
-            <input disabled id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 bg-transparent text-secondary-100 bg-gray-100 border-gray-300 focus:ring-secondary-300" />
-            <label onClick={() => addOption(question)} htmlFor="default-radio-1" className="w-full ml-2 cursor-text text-sm font-medium text-gray-400 accent-indigo-500 hover:border-b-2 ">Add new option</label>
+        <div className="py-4">
+          <Suggestions question={question} />
+          <div class="flex items-center justify-between pb-4 w-full">
+            <div className='flex items-center w-full'>
+              <input disabled id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 bg-transparent text-secondary-100 bg-gray-100 border-gray-300 focus:ring-secondary-300" />
+              <label onClick={() => addOption(question)} htmlFor="default-radio-1" className="w-full ml-2 cursor-text text-sm font-medium text-gray-400 accent-indigo-500 hover:border-b-2 ">Add new option</label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      {showDeleteModal && <DeleteQuestionModal handleButtonClick={deleteQuestionById} handleShowModal={handleShowDeleteModal} showModal={showDeleteModal} isButtonLoading={deleteLoading} />}
+    </>
   )
 }
 export default Question

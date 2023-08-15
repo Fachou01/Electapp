@@ -9,23 +9,25 @@ import Question from './components/Question/Question';
 import useBallot from './logic/useBallot';
 
 import './Ballot.css';
+import { ClipLoader } from 'react-spinners';
 
 
 const Ballot = () => {
 
-  const { showAddQuestion, setShowAddQuestion, questions, setQuestions, addOption, onChangeOption } = useBallot();
+  const { addBallotLoading, showAddQuestion, setShowAddQuestion, questions, setQuestions, loading, addOption, onChangeOption, submitBallot, refreshQuestions } = useBallot();
 
   const Suggestions = ({ question }) => {
     if (question?.suggestions) return (
       <>
-        {question.suggestions.map(({ title, value, genId }) => {
-          return <Option id={value} genId={genId} title={title} value={value} question={question} onChangeOption={onChangeOption} />
+        {question.suggestions.map(({ id, title, value }, idx) => {
+          return <Option index={idx} id={id} title={title} value={value} question={question} onChangeOption={onChangeOption} />
         })}
       </>
     )
   }
 
   const QuestionsLayout = () => {
+    if (loading) return <div className="flex items-center justify-center h-full pb-40"> <ClipLoader color={"4A90E2"} loading={loading} size={40} /></div>
     if (questions && questions.length > 0) {
       return (
         <>
@@ -38,13 +40,23 @@ const Ballot = () => {
               <main>
                 {questions.map((question) => {
                   return (
-                    <Question question={question} Suggestions={Suggestions} addOption={addOption} />
+                    <Question refreshQuestions={refreshQuestions} question={question} Suggestions={Suggestions} addOption={addOption} />
                   )
                 })
                 }
                 <Button className="bg-light-100 text-black" onClick={() => setShowAddQuestion(true)}><PlusIcon className="h-5 w-5" />Add Question</Button>
                 <div className="flex justify-end w-full">
-                  <Button variant="primary" classNamew="w-full">Create Ballot</Button>
+                  <Button
+                    onClick={submitBallot}
+                    variant={"primary"}
+                    className={`${addBallotLoading && "opacity-60"} `}>
+                    <ClipLoader
+                      color={"4A90E2"}
+                      loading={addBallotLoading}
+                      size={20}
+                    />
+                    {addBallotLoading ? null : "Save Ballot"}
+                  </Button>
                 </div>
 
               </main>
@@ -53,7 +65,7 @@ const Ballot = () => {
         </>
       )
     }
-    return (
+    if (!loading && questions.length <= 0) return (
       <div className='flex items-center justify-center flex-col pb-16 ballotWrapper h-full w-fit mx-auto'>
         <h2 className='text-4xl pb-4'>Build Your Ballot</h2>
         <p className='pb-6 text-xl'>Get started by adding your first question</p>

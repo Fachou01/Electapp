@@ -20,7 +20,7 @@ const AddQuestion = ({ showModal, setShowModal, questions, setQuestions }) => {
       {/* {loading && !error && <FormBodyLoading />} */}
       <h1 className="mb-4">Multiple Choice - Voters can select one or many options</h1>
       <form onSubmit={formik.handleSubmit} className="space-y-6 w-full">
-        <div className='bg-light-300 border border-light-300 p-2.5 rounded-lg'>
+        {/* <div className='bg-light-300 border border-light-300 p-2.5 rounded-lg'>
           Voters can select a maximum of
           <input
             type="number"
@@ -41,7 +41,7 @@ const AddQuestion = ({ showModal, setShowModal, questions, setQuestions }) => {
 
           />
           option(s)
-        </div>
+        </div> */}
         <div>
           <label
             htmlFor="title"

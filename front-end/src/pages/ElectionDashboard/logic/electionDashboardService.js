@@ -13,6 +13,6 @@ export const getElectionById = async (id) => {
 
 const ElectionDashboardService = {
   getElectionById
-}
+};
 
 export default ElectionDashboardService;

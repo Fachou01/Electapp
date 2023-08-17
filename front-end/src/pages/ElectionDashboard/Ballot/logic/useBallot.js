@@ -15,16 +15,15 @@ const useBallot = () => {
 
   const addOption = (question) => {
     const newQuestions = questions.map((currentQuestion) => {
-      
+
       if (currentQuestion.id === question.id) {
-        if (!question?.suggestions){
+        if (!question?.suggestions) {
           question.suggestions = [];
-        }else {
+        } else {
           genId.current = question?.suggestions[question.suggestions.length - 1]?.id || genId.current;
         }
-        const suggestionsCount = question.suggestions.length; 
+        const suggestionsCount = question.suggestions.length;
         const id = suggestionsCount + 1;
-        console.log("genId.current",genId.current)
         genId.current = genId.current + 1 + "#option";
         const newOption = {
           id: genId.current,
@@ -32,7 +31,7 @@ const useBallot = () => {
           value: id,
           dirty: false
         }
-        console.log("newOption", newOption);
+
         question.suggestions.push(newOption);
 
         return question;
@@ -63,7 +62,7 @@ const useBallot = () => {
           return { id: id, title: title, description: "test", questionId: question.id }
         })
         const response = await ballotService.addBulkSuggestions(suggestions, question.id);
-        console.log("response", response.status);
+
         if (response.status === 201) {
           toast.success("Ballot saved successfully");
           getQuestionsByElectionId();
@@ -81,10 +80,8 @@ const useBallot = () => {
   const getQuestionsByElectionId = async () => {
     try {
       // setError();
-      console.log("election",election);
       setLoading(true);
       const response = await ballotService.getQuestionsByElectionId(election.id);
-      console.log("response", response);
       if (response.status === 200) {
         setQuestions(response.data);
       }
@@ -97,15 +94,13 @@ const useBallot = () => {
       setLoading(false);
     }
   }
-  
+
   const refreshQuestions = () => getQuestionsByElectionId();
 
 
   useEffect(() => {
     getQuestionsByElectionId();
   }, [election])
-
-
 
 
   return {

@@ -2,6 +2,7 @@ import React from 'react';
 import OutletLayout from '../../../components/OutletLayout/OutletLayout';
 import Card from '../../../components/Card/Card';
 import { PlusIcon } from '@heroicons/react/outline';
+import { ClipLoader } from 'react-spinners';
 import AddQuestion from './components/AddQuestion/AddQuestion';
 import Button from '../../../components/Button/Button';
 import Option from './components/Option/Option';
@@ -9,8 +10,6 @@ import Question from './components/Question/Question';
 import useBallot from './logic/useBallot';
 
 import './Ballot.css';
-import { ClipLoader } from 'react-spinners';
-
 
 const Ballot = () => {
 

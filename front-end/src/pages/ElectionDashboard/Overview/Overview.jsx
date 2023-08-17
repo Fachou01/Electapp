@@ -20,8 +20,8 @@ function Overview() {
     <OutletLayout pageName={"Overview"}>
       {/* <div className='flex items-center w-full flex-wrap mb-12'>
         <div className='w-1/4'>
-          <Card color={"green"}>
-            <div className='flex justify-between items-center text-white'>
+          <Card color={"green"} extendStyle={"rounded-lg"}>
+            <div className='flex justify-between items-center text-white p-4'>
               <HomeIcon className="h-10 w-10 " />
               <div className='flex items-end flex-col'>
                 <p className='text-lg'>0 %</p>
@@ -31,8 +31,8 @@ function Overview() {
           </Card>
         </div>
         <div className='w-1/4 pl-3'>
-          <Card color={"red"}>
-            <div className='flex justify-between items-center text-white'>
+          <Card color={"red"} extendStyle={"rounded-lg"}>
+          <div className='flex justify-between items-center text-white p-4'>
               <UserGroupIcon className="h-10 w-10" />
               <div className='flex items-end flex-col'>
                 <p className='text-lg'>0</p>
@@ -42,8 +42,8 @@ function Overview() {
           </Card>
         </div>
         <div className='w-1/4 pl-3'>
-          <Card color={"blue"}>
-            <div className='flex justify-between items-center text-white'>
+          <Card color={"blue"} extendStyle={"rounded-lg"}>
+          <div className='flex justify-between items-center text-white p-4'>
               <HomeIcon className="h-10 w-10" />
               <div className='flex items-end flex-col'>
                 <p className='text-lg'>0 %</p>
@@ -53,8 +53,8 @@ function Overview() {
           </Card>
         </div>
         <div className='w-1/4 pl-3'>
-          <Card color={"blue"}>
-            <div className='flex justify-between items-center text-white'>
+          <Card color={"blue"} extendStyle={"rounded-lg"}>
+          <div className='flex justify-between items-center text-white p-4'>
               <HomeIcon className="h-10 w-10" />
               <div className='flex items-end flex-col'>
                 <p className='text-lg'>0 %</p>
@@ -66,17 +66,17 @@ function Overview() {
       </div>
       <div className='flex items-center flex-wrap'>
         <div className='w-1/3 pr-1'>
-          <Card>
+          <Card extendStyle={"rounded-lg shadow"}>
             <PolarArea data={sampleData} />
           </Card>
         </div>
         <div className='w-1/3 pl-1 pr-1'>
-          <Card>
+        <Card extendStyle={"rounded-lg shadow"}>
             <Pie data={sampleData} />
           </Card>
         </div>
         <div className='w-1/3 pl-1'>
-          <Card>
+        <Card extendStyle={"rounded-lg shadow"}>
             <Pie data={sampleData} />
           </Card>
         </div>

@@ -5,10 +5,10 @@ export const adminLogout = async () => {
   removeToken();
 };
 
-export const getElectionsByAdmin = async () => {
+export const getElectionsByAdmin = async (id) => {
   try {
     const response = await httpMain.get(
-      "/elections/admin",
+      `/elections/admin/${id}`,
     );
     return response.data;
 

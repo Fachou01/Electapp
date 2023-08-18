@@ -24,7 +24,6 @@ const useAddVoter = (setShowModal) => {
       setError();
       setLoading(true);
       const response = await votersService.addVoter(values);
-      console.log("response", response)
       if (response.status === 201) {
         toast.success("Voter successfully created !");
         setShowModal(false);

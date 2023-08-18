@@ -8,7 +8,7 @@ const httpMain = axios.create({
 httpMain.interceptors.request.use((config) => {
     const accessToken = getTokenValue();
     if (accessToken) {
-        config.headers['Authorization'] = `bearer ${accessToken}`
+        config.headers['Authorization'] = `Bearer ${accessToken}`
     }
     return config;
 },

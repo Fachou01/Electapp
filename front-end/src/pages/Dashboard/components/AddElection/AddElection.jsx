@@ -16,7 +16,7 @@ const AddElection = ({ showModal, setShowModal }) => {
           <div>
             <label
               htmlFor="title"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              className="block mb-2 text-sm font-medium text-gray-900"
             >
               Title
             </label>
@@ -26,7 +26,7 @@ const AddElection = ({ showModal, setShowModal }) => {
               id="title"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="title"
 
             />
@@ -39,7 +39,7 @@ const AddElection = ({ showModal, setShowModal }) => {
           <div>
             <label
               htmlFor="description"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              className="block mb-2 text-sm font-medium text-gray-900"
             >
               Description
             </label>
@@ -50,7 +50,7 @@ const AddElection = ({ showModal, setShowModal }) => {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               placeholder="description"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             />
             {formik.errors.description && formik.touched.description ? (
               <p className="text-red-500 text-sm">
@@ -61,7 +61,7 @@ const AddElection = ({ showModal, setShowModal }) => {
           <div>
             <label
               htmlFor="startDate"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              className="block mb-2 text-sm font-medium text-gray-900"
             >
               Start Date
             </label>
@@ -73,7 +73,7 @@ const AddElection = ({ showModal, setShowModal }) => {
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 placeholder="start-date"
-                className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div className="inline-block w-1/2">
@@ -84,7 +84,7 @@ const AddElection = ({ showModal, setShowModal }) => {
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 placeholder="start-time"
-                className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
@@ -97,7 +97,7 @@ const AddElection = ({ showModal, setShowModal }) => {
           <div>
             <label
               htmlFor="endDate"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              className="block mb-2 text-sm font-medium text-gray-900"
             >
               End Date
             </label>
@@ -109,7 +109,7 @@ const AddElection = ({ showModal, setShowModal }) => {
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 placeholder="end-date"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
               />
             </div>
             <div className="inline-block w-1/2">
@@ -120,7 +120,7 @@ const AddElection = ({ showModal, setShowModal }) => {
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 placeholder="end-time"
-                className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             {(formik.errors.endDate && formik.touched.endDate) || (formik.errors.endTime && formik.touched.endTime) ? (
@@ -132,7 +132,7 @@ const AddElection = ({ showModal, setShowModal }) => {
           <Button
             variant={"primary"}
             type="submit"
-            className={`w-full ${formik.isSubmitting} && opacity-60`}>
+            className={`w-full ${formik.isSubmitting && "opacity-60"} `}>
             <ClipLoader
               color={"4A90E2"}
               loading={isButtonLoading}

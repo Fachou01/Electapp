@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getElectionsByAdmin } from "../../../services/dashboardService";
+import { AuthContextApp } from "../../../../../utils/contexts/AuthContext";
 
 const useShowElection = (showModal) => {
 
@@ -9,15 +10,15 @@ const useShowElection = (showModal) => {
     const [isLoading, setIsLoading] = useState(true);
     const [elections, setElections] = useState();
 
-    // Call get elections api
+    const {authenticatedUser} = useContext(AuthContextApp);
+
     const fetchElections = async () => {
         try {
-            const elections = await getElectionsByAdmin();
-            if (elections) {
-                setElections(elections);
-            } else {
-                setElections();
-            }
+            const elections = await getElectionsByAdmin(authenticatedUser.id);
+            
+            if (elections) setElections(elections);
+             else setElections();
+            
         } catch (error) {
             console.log(error);
         } finally {
@@ -25,15 +26,20 @@ const useShowElection = (showModal) => {
         }
     };
 
-    const redirectElection = async (id) => {
+    const redirectElection = (id) => {
         navigate(`/election/${id}/overview`);
     };
 
     useEffect(() => {
-        fetchElections();
-    }, [showModal]);
+        authenticatedUser && fetchElections();
+    }, [authenticatedUser, showModal]);
 
-    return {isLoading, elections, redirectElection  }
+
+    return {
+        isLoading,
+        elections,
+        redirectElection
+    }
 
 }
 export default useShowElection

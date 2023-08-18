@@ -5,7 +5,7 @@ import useShowElection from "./hooks/useShowElection";
 
 const ElectionList = ({ showModal }) => {
 
-  const { elections, isLoading, redirectElection } = useShowElection(showModal)
+  const { elections, isLoading, redirectElection } = useShowElection(showModal);
 
   return (
     <div className="flex flex-col">
@@ -40,7 +40,7 @@ const ElectionList = ({ showModal }) => {
               </thead>
 
               <tbody className="bg-white divide-y divide-gray-200">
-                
+
                 {isLoading &&
                   <tr>
                     <td colSpan={4} className="text-center p-4">
@@ -70,10 +70,7 @@ const ElectionList = ({ showModal }) => {
                         {election.endDate}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a
-                          href="#"
-                          className="text-secondary-100 hover:text-secondary-300"
-                        >
+                        <a href="#" className="text-secondary-100 hover:text-secondary-300">
                           Edit
                         </a>
                       </td>

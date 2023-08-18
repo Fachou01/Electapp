@@ -11,7 +11,6 @@ const useElectionDashboard = () => {
   const getElectionById = async () => {
     try {
       const election = await ElectionDashboardService.getElectionById(id);
-      console.log(election);
       if (election) setElection(election);
       else console.log("Error occured");
     } catch (error) {

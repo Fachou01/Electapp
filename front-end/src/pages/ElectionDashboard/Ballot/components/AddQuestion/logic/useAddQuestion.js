@@ -23,11 +23,10 @@ const useAddQuestion = (setShowModal, questions, setQuestions) => {
       const question = values;
       question.electionId = election.id
       const response = await addQuestionService.addQuestion(question);
-      console.log("response", response)
       if (response.status === 201) {
         toast.success("Question successfully created !");
         setShowModal(false);
-        setQuestions([...questions, response.data.data]);
+        setQuestions([...questions, response.data]);
       }
     } catch (error) {
       toast.error("Error occured");

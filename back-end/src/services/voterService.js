@@ -95,6 +95,31 @@ const addVoter = async (name, email, voterId, key) => {
 };
 
 
+
+const bulkCreateVoters = async (voters) => {
+	try {
+		const createdVoters = await prisma.voter.createMany({
+			data: voters
+		});
+		if (createdVoters) return {
+			statusCode: 200,
+			payload: {
+				message: "Voters successfully created"
+			}
+		}
+		return {
+			statusCode: 400,
+			payload: {
+				message: "Bad request"
+			}
+		}
+
+	} catch (error) {
+		console.log("Error in bulkCreateVoters");
+		throw error;
+	}
+};
+
 const updateVoterById = async (id, data) => {
 	try {
 		const updatedVoter = await prisma.voter.update({
@@ -153,6 +178,7 @@ module.exports = {
 	getVoters,
 	getVoterById,
 	addVoter,
+	bulkCreateVoters,
 	updateVoterById,
 	deleteVoterById
 }

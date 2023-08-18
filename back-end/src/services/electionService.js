@@ -33,7 +33,7 @@ const getElectionById = async (id) => {
   try {
     const election = await prisma.election.findFirst({
       where: {
-        id: +id,
+        id: id,
       },
     });
     if (election) return {
@@ -52,6 +52,31 @@ const getElectionById = async (id) => {
     throw error;
   }
 };
+
+
+const getElectionByAdmin = async (id) => {
+  try {
+    const election = await prisma.election.findMany({
+      where: {
+        adminId: id,
+      },
+    });
+    if (election) return {
+      statusCode: 200,
+      payload: election
+    }
+
+    return {
+      statusCode: 204,
+      payload: {
+        message: "Election not found"
+      }
+    }
+  } catch (error) {
+    console.log("Error in getElectionById");
+    throw error;
+  }
+}
 
 
 const addElection = async (title, description, status, startDate, endDate, startTime, endTime, createdBy) => {
@@ -146,6 +171,7 @@ const deleteElectionById = async (id) => {
 module.exports = {
   getElections,
   getElectionById,
+  getElectionByAdmin,
   addElection,
   updateElectionById,
   deleteElectionById

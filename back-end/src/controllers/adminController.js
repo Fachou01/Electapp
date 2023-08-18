@@ -38,6 +38,7 @@ const getAdminById = async (request, response) => {
 const getAuthenticatedAdmin = async (request, response) => {
   try {
     const { token } = request.body;
+    console.log("request",request.headers);
     const result = await adminService.getAuthenticatedAdmin(token);
     return response.status(result.statusCode).send(result.payload);
   } catch (error) {

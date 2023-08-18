@@ -6,6 +6,7 @@ const electionController = require("../controllers/electionController");
 
 router.get("/", passport.authenticate("jwt", { session: false }), electionController.getElections);
 router.get("/:id", passport.authenticate("jwt", { session: false }), electionController.getElectionById);
+router.get("/admin/:id",passport.authenticate("jwt", { session: false }),electionController.getElectionByAdmin);
 router.post("/", passport.authenticate("jwt", { session: false }), electionController.addElection);
 router.put("/:id", passport.authenticate("jwt", { session: false }), electionController.updateElectionById);
 router.delete("/:id", passport.authenticate("jwt", { session: false }), electionController.deleteElectionById);

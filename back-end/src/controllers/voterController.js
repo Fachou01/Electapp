@@ -36,6 +36,18 @@ const addVoter = async (request, response) => {
 };
 
 
+const bulkCreateVoters = async (request, response) => {
+  try {
+    const { voters } = request.appLocals;
+    const result = await voterService.bulkCreateVoters(voters);
+    return response.status(result.statusCode).send(result.payload);
+  } catch (error) {
+    console.log(error);
+    return response.status(400).send("Error occured");
+  }
+};
+
+
 const updateVoterById = async (request, response) => {
   try {
     const { id } = req.params;
@@ -65,6 +77,7 @@ module.exports = {
   getVoters,
   getVoterById,
   addVoter,
+  bulkCreateVoters,
   updateVoterById,
   deleteVoterById
 };

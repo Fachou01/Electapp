@@ -15,7 +15,20 @@ const getElections = async (request, response) => {
 const getElectionById = async (request, response) => {
   try {
     const { id } = request.params;
-    const result = await electionService.getElectionById(id);
+    const result = await electionService.getElectionById(+id);
+    return response.status(result.statusCode).send(result.payload);
+  } catch (error) {
+    console.log(error);
+    return response.status(400).send("Error occured");
+  }
+};
+
+
+const getElectionByAdmin = async (request, response) => {
+  try {
+    const { id } = request.params;
+    const result = await electionService.getElectionByAdmin(+id);
+    console.log("result",result)
     return response.status(result.statusCode).send(result.payload);
   } catch (error) {
     console.log(error);
@@ -65,6 +78,7 @@ const deleteElectionById = async (request, response) => {
 module.exports = {
   getElections,
   getElectionById,
+  getElectionByAdmin,
   addElection,
   updateElectionById,
   deleteElectionById

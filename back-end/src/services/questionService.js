@@ -73,9 +73,7 @@ const addQuestion = async (title, description, electionId) => {
     const createdQuestion = await prisma.question.create({ data: question });
     if (createdQuestion) return {
       statusCode: 201,
-      payload: {
-        message: "Question successfully created"
-      }
+      payload: createdQuestion
     }
 
     return {

@@ -3,10 +3,10 @@ import useAddVoter from './logic/useAddVoter';
 import Modal from '../../../../components/Modal/Modal';
 import Button from '../../../../components/Button/Button';
 
-const AddVoter = ({ showModal, setShowModal }) => {
+const AddVoter = ({ showModal, setShowModal, getVoters }) => {
 
 
-  const { loading, error, formik } = useAddVoter(setShowModal);
+  const { loading, error, formik } = useAddVoter(setShowModal, getVoters);
 
   const handleShowModal = () => {
     setShowModal(!showModal);

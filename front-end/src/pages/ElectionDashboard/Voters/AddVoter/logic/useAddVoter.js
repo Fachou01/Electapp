@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import { useFormik } from "formik";
 import { ElectionContextApp } from "../../../../../utils/contexts/ElectionContext";
-import votersSchemas from "./votersValidationSchema";
-import votersService from "./votersService";
+import votersSchemas from "../../logic/votersValidationSchema";
+import votersService from "../../logic/votersService";
 import { toast } from "react-toastify";
 
 
-const useAddVoter = (setShowModal) => {
+const useAddVoter = (setShowModal, getVoters) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -27,6 +27,9 @@ const useAddVoter = (setShowModal) => {
       if (response.status === 201) {
         toast.success("Voter successfully created !");
         setShowModal(false);
+        getVoters();
+      }else{
+        toast.error("Error occured");
       }
     } catch (error) {
       toast.error("Error occured");

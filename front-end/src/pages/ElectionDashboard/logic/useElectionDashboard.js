@@ -14,7 +14,7 @@ const useElectionDashboard = () => {
       if (election) setElection(election);
       else console.log("Error occured");
     } catch (error) {
-      console.error("Error in GetElectionById API", error);
+      console.error("Error in getElectionById API", error);
     }
   }
 

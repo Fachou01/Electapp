@@ -20,7 +20,7 @@ const TableBody = ({ data, loading, voterIdRef, setShowEditVoter }) => {
           {elem.voterId}
         </td>
         <td className="px-6 py-4">
-          <span onClick={() => showEditModal(elem.id)} className="font-medium text-secondary-300 hover:underline cursor-pointer">Edit</span>
+          <span onClick={() => showEditModal(elem.id)} className="font-medium pr-2 text-secondary-300 hover:underline cursor-pointer">Edit</span>
         </td>
       </tr>
     )

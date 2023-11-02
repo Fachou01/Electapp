@@ -13,7 +13,7 @@ import './Header.css';
 
 const navigation = [
 	{ name: "Dashboard", href: "/dashboard", current: false },
-	{ name: "Settings", href: "#", current: false },
+	// { name: "Settings", href: "#", current: false },
 ];
 
 const userNavigation = [

@@ -58,9 +58,9 @@ const QuestionDropDown = ({ handleShowDeleteModal }) => {
   )
 }
 
-const Question = ({ refreshQuestions, question, addOption, Suggestions }) => {
+const Question = ({ refreshQuestions, refreshQuestionById, question, addOption, Suggestions }) => {
 
-  const { handleShowDeleteModal, showDeleteModal, deleteLoading, deleteQuestionById } = useQuestion(question, refreshQuestions);
+  const { handleShowDeleteModal, showDeleteModal, deleteLoading, deleteQuestionById } = useQuestion(question, refreshQuestionById);
   return (
     <>
       <div className='border p-4 mb-3 bg-light-100 rounded-lg relative'>

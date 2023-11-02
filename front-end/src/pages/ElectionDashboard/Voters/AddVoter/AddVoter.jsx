@@ -2,6 +2,7 @@ import { ClipLoader } from 'react-spinners';
 import useAddVoter from './logic/useAddVoter';
 import Modal from '../../../../components/Modal/Modal';
 import Button from '../../../../components/Button/Button';
+import AppForm from '../../../../components/AppForm/AppForm';
 
 const AddVoter = ({ showModal, setShowModal, getVoters }) => {
 
@@ -14,8 +15,7 @@ const AddVoter = ({ showModal, setShowModal, getVoters }) => {
 
   return (
     <Modal showModal={showModal} handleShowModal={handleShowModal} title={"Add Voter"}>
-      {/* {loading && !error && <FormBodyLoading />} */}
-      <form onSubmit={formik.handleSubmit} className="space-y-6 w-[600px]">
+      <AppForm handleSubmit={formik.handleSubmit} isSubmitting={formik.isSubmitting} isSubmitButtonLoading={loading} submitButtonLabel={"Save"}>
         <div>
           <label
             htmlFor="name"
@@ -107,11 +107,7 @@ const AddVoter = ({ showModal, setShowModal, getVoters }) => {
             </p>
           ) : null}
         </div>
-        <Button disabled={loading} type='submit' variant={"primary"}>
-          {loading ? <ClipLoader color='#FFF' size={18} loading={loading} /> : <span>Save</span>}
-        </Button>
-      </form>
-
+      </AppForm>
     </Modal>
   )
 }

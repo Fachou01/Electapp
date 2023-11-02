@@ -15,7 +15,7 @@ const useAdminRegister = () => {
         email: "",
         name: "",
         password: "",
-        repeatPassword: "",
+        repeatPassword: ""
     };
     //on Submit form
     const onSubmit = async (values, { resetForm }) => {

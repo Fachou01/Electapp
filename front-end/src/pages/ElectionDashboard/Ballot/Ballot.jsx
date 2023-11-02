@@ -13,13 +13,26 @@ import './Ballot.css';
 
 const Ballot = () => {
 
-  const { addBallotLoading, showAddQuestion, setShowAddQuestion, questions, setQuestions, loading, addOption, onChangeOption, submitBallot, refreshQuestions } = useBallot();
+  const { addBallotLoading,
+    refreshQuestionById,
+    showAddQuestion,
+    setShowAddQuestion,
+    questions,
+    setQuestions,
+    loading,
+    addOption,
+    onChangeOption,
+    submitBallot,
+    deleteOption,
+    refreshQuestions
+  } = useBallot();
 
   const Suggestions = ({ question }) => {
+    console.log("rended suggestions")
     if (question?.suggestions) return (
       <>
         {question.suggestions.map(({ id, title, value }, idx) => {
-          return <Option index={idx} id={id} title={title} value={value} question={question} onChangeOption={onChangeOption} />
+          return <Option index={idx} id={id} title={title} value={value} question={question} onChangeOption={onChangeOption} deleteOption={deleteOption} />
         })}
       </>
     )
@@ -30,7 +43,7 @@ const Ballot = () => {
     if (questions && questions.length > 0) {
       return (
         <>
-          <div className='md:w-[500px] lg:w-[800px] mx-auto border p-4 rounded-lg bg-light-300'>
+          <div className='md:w-[500px] lg:w-[800px] mx-auto border p-4 rounded-lg bg-light-100'>
             <header>
               <h2 className='text-lg pb-4'>Multiple Choice</h2>
             </header>
@@ -39,11 +52,11 @@ const Ballot = () => {
               <main>
                 {questions.map((question) => {
                   return (
-                    <Question refreshQuestions={refreshQuestions} question={question} Suggestions={Suggestions} addOption={addOption} />
+                    <Question refreshQuestions={refreshQuestions} refreshQuestionById={refreshQuestionById} question={question} Suggestions={Suggestions} addOption={addOption} />
                   )
                 })
                 }
-                <Button className="bg-light-100 text-black" onClick={() => setShowAddQuestion(true)}><PlusIcon className="h-5 w-5" />Add Question</Button>
+                <Button className="bg-light-300 text-black" onClick={() => setShowAddQuestion(true)}><PlusIcon className="h-5 w-5" />Add Question</Button>
                 <div className="flex justify-end w-full">
                   <Button
                     onClick={submitBallot}
@@ -65,19 +78,21 @@ const Ballot = () => {
       )
     }
     if (!loading && questions.length <= 0) return (
-      <div className='flex items-center justify-center flex-col pb-16 ballotWrapper h-full w-fit mx-auto'>
-        <h2 className='text-4xl pb-4'>Build Your Ballot</h2>
-        <p className='pb-6 text-xl'>Get started by adding your first question</p>
-        <Button variant="primary" onClick={() => setShowAddQuestion(true)}><PlusIcon className="h-5 w-5" />Add Question</Button>
-      </div>
+      <section className="flex items-center justify-center h-full">
+        <Card extendStyle={"rounded-lg"}>
+          <div className='flex items-center justify-center flex-col p-16 ballotWrapper w-fit mx-auto'>
+            <h2 className='text-4xl pb-4'>Build Your Ballot</h2>
+            <p className='pb-6 text-xl'>Get started by adding your first question</p>
+            <Button variant="primary" onClick={() => setShowAddQuestion(true)}><PlusIcon className="h-5 w-5" />Add Question</Button>
+          </div>
+        </Card>
+      </section>
     )
   }
 
   return (
     <OutletLayout pageName={"Ballot"}>
-      <Card extendStyle="h-full">
-        <QuestionsLayout />
-      </Card>
+      <QuestionsLayout />
       {showAddQuestion && <AddQuestion showModal={showAddQuestion} setShowModal={setShowAddQuestion} questions={questions} setQuestions={setQuestions} />}
     </OutletLayout>
   )

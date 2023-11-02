@@ -50,7 +50,8 @@ const Voters = () => {
 			return <div>
 				<header className='flex justify-between pb-4 items-center'>
 					<SearchInput />
-					<Button onClick={() => setShowAddVoter(true)} variant="primary"><PlusIcon className="h-5 w-5" />Add Voter</Button></header>
+					<Button onClick={() => setShowAddVoter(true)} variant="primary"><PlusIcon className="h-5 w-5" />Add Voter</Button>
+				</header>
 				<Table data={voters} loading={loading} voterIdRef={voterIdRef} setShowEditVoter={setShowEditVoter} />
 			</div>
 		}
@@ -58,14 +59,13 @@ const Voters = () => {
 
 
 	return (
-		<OutletLayout pageName={"Ballot"}>
-			<Card extendStyle="h-full">
+		<OutletLayout pageName={"Voters"}>
+			<Card extendStyle="h-full p-4">
 				<VotersLayout />
 			</Card>
 			{showAddVoter && <AddVoter showModal={showAddVoter} setShowModal={setShowAddVoter} getVoters={getVoters} />}
 			{showEditVoter && <EditVoter showModal={showEditVoter} setShowModal={setShowEditVoter} voterIdRef={voterIdRef} getVoters={getVoters} />}
-			{showImportVoters && <ImportVoters showModal={showImportVoters} setShowModal={setShowImportVoters} />}
-
+			{showImportVoters && <ImportVoters showModal={showImportVoters} setShowModal={setShowImportVoters} getVoters={getVoters} />}
 		</OutletLayout>
 	)
 }

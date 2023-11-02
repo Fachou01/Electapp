@@ -1,9 +1,19 @@
 import httpMain from '../../../../utils/api/httpMain';
 
 
+export const getQuestionById = async (id) => {
+  try {
+    const response = await httpMain.get(`/questions/${id}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 export const getQuestionsByElectionId = async (electionId) => {
   try {
-    const response = await httpMain.get(`/questions/${electionId}`);
+    const response = await httpMain.get(`/questions/elections/${electionId}`);
     return response;
   } catch (error) {
     throw error;
@@ -35,10 +45,25 @@ export const addBulkSuggestions = async (suggestions, questionId) => {
 };
 
 
+export const deleteSuggestion = async (id, questionId) => {
+  try {
+    const response = await httpMain.delete(
+      `suggestions/${id}/questions/${questionId}`
+    );
+    return response;
+
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 const ballotService = {
+  getQuestionById,
   getQuestionsByElectionId,
   deleteQuestionById,
-  addBulkSuggestions
+  addBulkSuggestions,
+  deleteSuggestion
 }
 
 export default ballotService;

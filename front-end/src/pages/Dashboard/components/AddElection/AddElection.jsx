@@ -3,6 +3,7 @@ import { ClipLoader } from "react-spinners";
 import Modal from "../../../../components/Modal/Modal";
 import useAddElection from "./hooks/useAddElection";
 import Button from "../../../../components/Button/Button";
+import AppForm from "../../../../components/AppForm/AppForm";
 
 
 const AddElection = ({ showModal, setShowModal }) => {
@@ -12,7 +13,7 @@ const AddElection = ({ showModal, setShowModal }) => {
   return (
     <>
       <Modal showModal={showModal} handleShowModal={handleShowModal} title={"Add a new election"}>
-        <form onSubmit={formik.handleSubmit} className="space-y-6 w-96">
+        <AppForm handleSubmit={formik.handleSubmit} isSubmitting={formik.isSubmitting} isSubmitButtonLoading={isButtonLoading} submitButtonLabel={"Add election"}>
           <div>
             <label
               htmlFor="title"
@@ -129,18 +130,7 @@ const AddElection = ({ showModal, setShowModal }) => {
               </p>
             ) : null}
           </div>
-          <Button
-            variant={"primary"}
-            type="submit"
-            className={`w-full ${formik.isSubmitting && "opacity-60"} `}>
-            <ClipLoader
-              color={"4A90E2"}
-              loading={isButtonLoading}
-              size={20}
-            />
-            {formik.isSubmitting ? null : "Add election"}
-          </Button>
-        </form>
+        </AppForm>
       </Modal>
     </>
   );

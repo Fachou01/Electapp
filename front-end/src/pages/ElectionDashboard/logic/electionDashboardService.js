@@ -11,8 +11,20 @@ export const getElectionById = async (id) => {
   }
 };
 
+export const getElectionStats = async (id) => {
+  try {
+    const response = await httpMain.get(
+      `/elections/${id}/stats`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const ElectionDashboardService = {
-  getElectionById
+  getElectionById,
+  getElectionStats
 };
 
 export default ElectionDashboardService;

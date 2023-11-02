@@ -11,6 +11,16 @@ export const getAllVoters = async () => {
 };
 
 
+export const getAllVotersByElection = async (electionId) => {
+  try {
+    const response = await httpMain.get(`/voters/election/${electionId}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 export const getVoterById = async (id) => {
   try {
     const response = await httpMain.get(`/voters/${id}`);
@@ -21,9 +31,12 @@ export const getVoterById = async (id) => {
 };
 
 
-export const addVoter = async (values) => {
+export const addVoter = async (values, electionId) => {
   try {
-    const response = await httpMain.post(`/voters`, values);
+    const response = await httpMain.post(`/voters`, {
+      ...values,
+      electionId
+    });
     return response;
   } catch (error) {
     throw error;
@@ -31,11 +44,11 @@ export const addVoter = async (values) => {
 };
 
 
-export const bulkCreatVoters = async (file) => {
+export const bulkCreateVoters = async (file, electionId) => {
   try {
     const formData = new FormData();
-    formData.append("filee", file);
-    const response = await httpMain.post(`/voters/bulk`, formData, {
+    formData.append("file", file);
+    const response = await httpMain.post(`/voters/bulk/${electionId}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       }
@@ -59,9 +72,10 @@ export const editVoter = async (id, values) => {
 
 const votersService = {
   getAllVoters,
+  getAllVotersByElection,
   getVoterById,
   addVoter,
-  bulkCreatVoters,
+  bulkCreateVoters,
   editVoter
 }
 

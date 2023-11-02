@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { HomeIcon, CogIcon, OfficeBuildingIcon, UserGroupIcon, PlayIcon, RssIcon } from "@heroicons/react/outline";
 import { ElectionContextApp } from "../../utils/contexts/ElectionContext";
+import { twMerge } from 'tailwind-merge';
 
 import "./SideBar.css";
 
@@ -46,15 +47,31 @@ const SideBar = () => {
 
   const { election } = useContext(ElectionContextApp);
 
-  const SideBarTitle = () => {
+  const SideBarTitle = ({ status }) => {
+    const electionStatusEnum = {
+      "PENDING": {
+        style: "bg-yellow-200 text-gray-800",
+        label: "Pending"
+      },
+      "STARTED": {
+        style: "bg-green-200 text-gray-800",
+        label: "Started"
+      }
+    }
+    const electionStatusStyle = twMerge("text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full", electionStatusEnum[status]?.style)
+
     if (!election) return <>
       <div className="animate-pulse h-5 mb-10 bg-primary-300 rounded-full "></div>
       <div className="animate-pulse h-5 bg-primary-300 rounded-full "></div>
     </>
     return <div>
       <h1 className="mb-10">ElectApp</h1>
-      <h2>{election?.title}</h2>
+      <div className="flex items-center gap-2">
+        <h2>{election?.title}</h2>
+        <span className={electionStatusStyle}>{electionStatusEnum[status]?.label}</span>
+      </div>
     </div>
+
   }
 
   const SideBarFooter = () => {
@@ -100,7 +117,7 @@ const SideBar = () => {
     <aside className="fixed w-72 h-screen sideBarAside bg-primary-100 text-white shadow-lg">
       <div className="flex flex-col justify-between px-2 sm:px-4 lg:px-4 h-full">
         <header className="pt-8 px-2">
-          <SideBarTitle />
+          <SideBarTitle status={election?.status} />
         </header>
         <main>
           <SideBarBody />
@@ -110,4 +127,5 @@ const SideBar = () => {
     </aside>
   )
 }
+
 export default SideBar;

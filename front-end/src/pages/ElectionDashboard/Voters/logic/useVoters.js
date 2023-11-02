@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import votersService from "./votersService";
+import { useParams } from "react-router-dom";
 
 const useVoters = () => {
+
+  const {id: electionId} = useParams();
 
   const [voters, setVoters] = useState();
   const [loading, setLoading] = useState(true);
@@ -17,7 +20,8 @@ const useVoters = () => {
     try {
       // setError();
       setLoading(true);
-      const response = await votersService.getAllVoters();
+      const response = await votersService.getAllVotersByElection(electionId);
+      console.log("response voters", response);
       if (response.status === 200) {
         setVoters(response.data);
       }

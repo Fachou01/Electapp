@@ -127,15 +127,15 @@ const AdminLogin = () => {
                       Remember me
                     </label>
                   </div>
-
+                  <Link to={"/forgot-password"}>
                   <div className="text-sm">
-                    <a
-                      href="/#"
+                    <div
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
                       Forgot your password?
-                    </a>
+                    </div>
                   </div>
+                  </Link>
                 </div>
                 <div className="flex items-center">
                   <Link to={"/register"}>

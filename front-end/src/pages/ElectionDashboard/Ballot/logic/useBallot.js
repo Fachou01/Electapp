@@ -15,7 +15,6 @@ const useBallot = () => {
 
   const addOption = (question) => {
     const newQuestions = questions.map((currentQuestion) => {
-
       if (currentQuestion.id === question.id) {
         if (!question?.suggestions) {
           question.suggestions = [];
@@ -29,18 +28,17 @@ const useBallot = () => {
           id: genId.current,
           title: "New option",
           value: id,
-          dirty: false
+          dirty: false,
+          new: true
         }
-
         question.suggestions.push(newOption);
-
         return question;
       }
       return currentQuestion;
     })
-
     setQuestions(newQuestions);
   }
+
 
   const onChangeOption = (id, question, title) => {
     const questionIndex = questions.findIndex(currentQuestion => currentQuestion.id === question.id);
@@ -50,7 +48,28 @@ const useBallot = () => {
         const option = questions[questionIndex].suggestions[suggestionIndex];
         const newOption = { ...option, title: title, dirty: true }
         questions[questionIndex].suggestions[suggestionIndex] = newOption;
+        console.log("newOption", newOption)
       }
+    }
+  }
+
+  const deleteOption = async (id, question) => {
+    let newOption = false;
+    const questionIndex = questions.findIndex(currentQuestion => currentQuestion.id === question.id);
+    if (questionIndex > -1) {
+      const filteredSuggestions = questions[questionIndex].suggestions.filter(suggestion => {
+        if (suggestion.id === id && suggestion.new === true) newOption = true;
+        return suggestion.id !== id
+      });
+      if (newOption) {
+        const newQuestions = [...questions];
+        newQuestions[questionIndex].suggestions = filteredSuggestions;
+        setQuestions(newQuestions);
+      } else {
+        const response = await ballotService.deleteSuggestion(id, question.id);
+        if (response.status === 200) refreshQuestionById(question.id);
+      }
+
     }
   }
 
@@ -62,7 +81,6 @@ const useBallot = () => {
           return { id: id, title: title, description: "test", questionId: question.id }
         })
         const response = await ballotService.addBulkSuggestions(suggestions, question.id);
-
         if (response.status === 201) {
           toast.success("Ballot saved successfully");
           getQuestionsByElectionId();
@@ -83,8 +101,32 @@ const useBallot = () => {
       setLoading(true);
       const response = await ballotService.getQuestionsByElectionId(election.id);
       if (response.status === 200) {
+        console.log("questions response", response.data);
         setQuestions(response.data);
-      }
+      }else setQuestions([])
+    } catch (error) {
+      // toast.error("Error occured");
+      // setError("Error Occured");
+      console.error("Error in getQuestionsByElectionId");
+    } finally {
+      // setLoading(false);
+      setLoading(false);
+    }
+  }
+
+
+  const getQuestionById = async (questionId) => {
+    try {
+      // setError();
+      setLoading(true);
+      const response = await ballotService.getQuestionById(questionId);
+      if (response.status === 200) {
+        const newQuestions = [...questions];
+        const newQuestionIndex = newQuestions.findIndex(currentQuestion => currentQuestion.id === questionId);
+        console.log("newQuestionIndex",newQuestionIndex)
+        newQuestions[newQuestionIndex] = response.data;
+        setQuestions(newQuestions);
+      }else setQuestions([])
     } catch (error) {
       // toast.error("Error occured");
       // setError("Error Occured");
@@ -96,6 +138,7 @@ const useBallot = () => {
   }
 
   const refreshQuestions = () => getQuestionsByElectionId();
+  const refreshQuestionById = (id) => getQuestionById(id);
 
 
   useEffect(() => {
@@ -105,6 +148,7 @@ const useBallot = () => {
 
   return {
     addBallotLoading,
+    refreshQuestionById,
     refreshQuestions,
     showAddQuestion,
     setShowAddQuestion,
@@ -114,6 +158,7 @@ const useBallot = () => {
     genId,
     addOption,
     onChangeOption,
+    deleteOption,
     submitBallot
   }
 }

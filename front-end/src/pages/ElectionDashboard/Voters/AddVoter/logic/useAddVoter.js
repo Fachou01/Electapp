@@ -23,7 +23,7 @@ const useAddVoter = (setShowModal, getVoters) => {
     try {
       setError();
       setLoading(true);
-      const response = await votersService.addVoter(values);
+      const response = await votersService.addVoter(values, election.id);
       if (response.status === 201) {
         toast.success("Voter successfully created !");
         setShowModal(false);

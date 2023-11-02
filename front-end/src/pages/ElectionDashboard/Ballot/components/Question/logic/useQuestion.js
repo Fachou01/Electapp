@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import ballotService from '../../../logic/ballotService';
 
-const useQuestion = (question, refreshQuestions) => {
+const useQuestion = (question, refreshQuestionById) => {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -13,14 +13,13 @@ const useQuestion = (question, refreshQuestions) => {
       if (response.status === 200) {
         toast.success("Question successfully deleted");
         setShowDeleteModal(false);
-        refreshQuestions();
+        refreshQuestionById(question.id);
       }
     } catch (error) {
       toast.error("Error occured");
     } finally {
       setDeleteLoading(false);
     }
-
   }
 
   const handleShowDeleteModal = () => {

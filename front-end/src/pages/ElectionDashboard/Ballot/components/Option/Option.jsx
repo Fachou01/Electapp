@@ -2,7 +2,7 @@ import { XIcon } from '@heroicons/react/outline';
 
 import './Option.css';
 
-const Option = ({ index, id, title, value, onChangeOption, question }) => {
+const Option = ({ index, id, title, value, onChangeOption, question, deleteOption }) => {
   return (
     <div className="flex items-center justify-between pb-4 w-full ">
       <div className='flex items-center gap-3 h-5 w-full'>
@@ -10,7 +10,7 @@ const Option = ({ index, id, title, value, onChangeOption, question }) => {
         <input className='w-full hover:border-b-2' type="text" name="txt1" id={`input-${index}`} defaultValue={title} onChange={(e) => onChangeOption(id, question, e.target.value)} />
       </div>
       <div>
-        <div className="p-1 cursor-pointer rounded-lg hover:bg-secondary-300 hover:text-[#f9f9f9]"><XIcon className='w-5 h-5' /></div>
+        <div className="p-1 cursor-pointer rounded-lg hover:bg-secondary-300 hover:text-[#f9f9f9]" onClick={()=>deleteOption(id,question)}><XIcon className='w-5 h-5' /></div>
       </div>
     </div>
   )
